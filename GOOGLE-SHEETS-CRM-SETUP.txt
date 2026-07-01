@@ -1,0 +1,45 @@
+POSTERCHILD MEDIA — OPTION 3 GOOGLE SHEETS CRM SETUP
+
+This upgrade makes your form do all 3 things:
+1. Save each lead to Google Sheets.
+2. Email you at amvlgam@gmail.com.
+3. Send the client an automatic confirmation email.
+
+STEP 1 — CREATE THE SHEET
+1. Go to Google Sheets.
+2. Create a blank sheet named: Posterchild Media Leads
+3. Add a tab named: Leads
+
+STEP 2 — ADD THE SCRIPT
+1. In the sheet, go to Extensions > Apps Script.
+2. Delete the starter code.
+3. Paste everything from google-apps-script.js.
+4. Save the project as: Posterchild Media Lead System
+
+STEP 3 — DEPLOY THE SCRIPT
+1. Click Deploy > New deployment.
+2. Select type: Web app.
+3. Execute as: Me.
+4. Who has access: Anyone.
+5. Click Deploy.
+6. Approve permissions.
+7. Copy the Web app URL.
+
+STEP 4 — CONNECT THE WEBSITE FORM
+Open booking.html and replace the FormSubmit fetch block with your Apps Script URL.
+The easiest approach is to send the same JSON data object to your Web app URL:
+
+await fetch('YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE', {
+  method: 'POST',
+  body: JSON.stringify(data)
+});
+
+STEP 5 — TEST
+1. Redeploy the website.
+2. Submit a test booking.
+3. Confirm the row appears in Google Sheets.
+4. Confirm amvlgam@gmail.com receives the inquiry.
+5. Confirm the client receives the confirmation email.
+
+IMPORTANT
+Google Apps Script may require a redeploy every time you edit the script. Choose Deploy > Manage deployments > Edit > New version > Deploy.

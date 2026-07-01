@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Experience — Posterchild Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300&family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#ffffff;--off-white:#f0f4f8;--silver:#dde4ed;
+  --silver-mid:#b8c4d4;--silver-dark:#8595aa;
+  --ink:#0d1117;--ink-mid:#2a3340;--ink-soft:#4a5568;
+  --blue:#1565ff;--blue-light:#4d8aff;--blue-pale:#ddeaff;
+  --yellow:#ffd600;--yellow-light:#ffec6e;--yellow-pale:#fffbe0;
+  --red:#e8001e;--red-light:#ff4d63;--red-pale:#ffe0e4;
+  --surface:#f6f8fb;--surface-2:#edf1f7;
+  --border:#cdd5e0;--border-light:#e4eaf2;
+  --font-display:'Rajdhani',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-ui:'DM Sans',sans-serif;
+  --radius:12px;--radius-lg:20px;--radius-pill:999px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--ink);font-family:var(--font-body);font-weight:400;overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{position:fixed;width:10px;height:10px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform 0.1s,background 0.2s}
+.cursor-ring{position:fixed;width:32px;height:32px;border:2px solid var(--blue);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width 0.25s,height 0.25s,transform 0.07s}
+.cursor.hov{transform:translate(-50%,-50%) scale(2.5);background:var(--yellow)}
+.cursor-ring.hov{width:48px;height:48px;border-color:var(--yellow)}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--silver)}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.9);backdrop-filter:blur(20px);border-bottom:1.5px solid var(--border-light);transition:all 0.3s}
+nav.scrolled{box-shadow:0 2px 24px rgba(21,101,255,0.08)}
+.nav-logo{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:6px}
+.nav-logo-dot{width:10px;height:10px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px var(--blue-pale)}
+.nav-logo .r{color:var(--red)}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-family:var(--font-ui);font-size:13px;font-weight:500;padding:8px 16px;border-radius:var(--radius-pill);transition:all 0.2s}
+.nav-links a:hover{background:var(--surface);color:var(--ink)}
+.nav-links a.active{color:var(--blue);background:var(--blue-pale);font-weight:700}
+.nav-cta{background:var(--blue)!important;color:var(--white)!important;font-weight:700!important;box-shadow:0 4px 16px rgba(21,101,255,0.3)}
+.nav-cta:hover{background:#0f50e0!important;transform:translateY(-1px)}
+.nav-ham{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px}
+.nav-ham span{width:22px;height:2px;background:var(--ink);border-radius:2px}
+
+/* STICKY */
+.sticky-book{position:fixed;bottom:28px;right:28px;z-index:999;background:var(--blue);color:var(--white);padding:14px 24px;font-family:var(--font-ui);font-size:12px;letter-spacing:0.06em;font-weight:700;text-decoration:none;border-radius:var(--radius-pill);display:flex;align-items:center;gap:8px;box-shadow:0 6px 28px rgba(21,101,255,0.35);transition:all 0.3s}
+.sticky-book:hover{background:#0f50e0;transform:translateY(-3px)}
+.sticky-book-dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);animation:pulse 1.8s infinite}
+
+/* PAGE HERO */
+.page-hero{padding:140px 40px 80px;background:var(--white);position:relative;overflow:hidden;text-align:center}
+.ph-shapes{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.ph-c1{position:absolute;width:600px;height:600px;border-radius:50%;top:-200px;right:-150px;background:radial-gradient(circle,rgba(21,101,255,0.07) 0%,transparent 70%)}
+.ph-c2{position:absolute;width:400px;height:400px;border-radius:50%;bottom:-120px;left:-80px;background:radial-gradient(circle,rgba(255,214,0,0.1) 0%,transparent 70%)}
+.ph-c3{position:absolute;width:280px;height:280px;border-radius:50%;top:40%;left:20%;background:radial-gradient(circle,rgba(232,0,30,0.05) 0%,transparent 70%)}
+.page-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.ph-tag{display:inline-flex;align-items:center;gap:8px;background:var(--blue-pale);color:var(--blue);border:1.5px solid rgba(21,101,255,0.2);padding:7px 18px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:28px;animation:fadeUp 0.7s ease both 0.1s}
+.ph-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 1.8s infinite}
+.ph-h1{font-family:var(--font-display);font-size:clamp(52px,8vw,88px);font-weight:700;line-height:0.95;letter-spacing:-0.01em;margin-bottom:20px;animation:fadeUp 0.7s ease both 0.2s}
+.ph-h1 .y{background:var(--yellow);padding:0 10px;display:inline-block;transform:skewX(-3deg)}
+.ph-sub{font-family:var(--font-ui);font-size:17px;font-weight:300;color:var(--ink-soft);line-height:1.7;margin-bottom:40px;animation:fadeUp 0.7s ease both 0.35s}
+.ph-cta{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:var(--white);padding:18px 44px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 8px 28px rgba(21,101,255,0.35);transition:all 0.3s;animation:fadeUp 0.7s ease both 0.5s}
+.ph-cta:hover{background:#0f50e0;transform:translateY(-3px)}
+.ph-cta svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform 0.3s}
+.ph-cta:hover svg{transform:translateX(4px)}
+.ph-stats{display:flex;align-items:center;justify-content:center;gap:40px;margin-top:56px;padding-top:48px;border-top:1.5px solid var(--border-light);animation:fadeUp 0.7s ease both 0.65s;flex-wrap:wrap}
+.ph-stat-num{font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--ink);line-height:1}
+.ph-stat-num.blue{color:var(--blue)}.ph-stat-num.red{color:var(--red)}
+.ph-stat-label{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+.ph-stat-div{width:1px;height:40px;background:var(--border-light)}
+
+/* SECTION COMMON */
+section{padding:88px 40px}
+.sec-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px}
+.sec-tag-bar{width:28px;height:3px;border-radius:2px}
+.sec-tag-text{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase}
+.sec-h2{font-family:var(--font-display);font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.0;letter-spacing:-0.01em;margin-bottom:16px}
+.sec-sub{font-family:var(--font-ui);font-size:15px;color:var(--ink-soft);line-height:1.7;max-width:560px}
+
+/* PRICING */
+.pricing-bg{background:var(--surface)}
+.pricing-inner{max-width:1200px;margin:0 auto}
+.pricing-group-label{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--ink-soft);margin:48px 0 20px;display:flex;align-items:center;gap:12px}
+.pricing-group-label::after{content:'';flex:1;height:1px;background:var(--border-light)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pricing-grid.two{grid-template-columns:repeat(2,1fr)}
+.price-card{background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--radius-lg);padding:32px 28px;position:relative;transition:all 0.3s;overflow:hidden}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.price-card:nth-child(1)::before,.price-card:nth-child(4)::before{background:var(--blue)}
+.price-card:nth-child(2)::before{background:var(--yellow)}
+.price-card:nth-child(3)::before,.price-card:nth-child(5)::before{background:var(--red)}
+.price-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(13,17,23,0.08);border-color:var(--border)}
+.price-card.popular{border-color:var(--blue);box-shadow:0 8px 32px rgba(21,101,255,0.12)}
+.price-card.popular:hover{box-shadow:0 16px 48px rgba(21,101,255,0.2)}
+.pop-badge{position:absolute;top:20px;right:20px;background:var(--blue);color:var(--white);font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:5px 12px;border-radius:var(--radius-pill)}
+.price-icon{width:44px;height:44px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.price-card:nth-child(1) .price-icon,.price-card:nth-child(4) .price-icon{background:var(--blue-pale)}
+.price-card:nth-child(2) .price-icon{background:var(--yellow-pale)}
+.price-card:nth-child(3) .price-icon,.price-card:nth-child(5) .price-icon{background:var(--red-pale)}
+.price-icon svg{width:20px;height:20px;fill:none;stroke-width:1.8}
+.price-card:nth-child(1) .price-icon svg,.price-card:nth-child(4) .price-icon svg{stroke:var(--blue)}
+.price-card:nth-child(2) .price-icon svg{stroke:var(--ink)}
+.price-card:nth-child(3) .price-icon svg,.price-card:nth-child(5) .price-icon svg{stroke:var(--red)}
+.price-name{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.price-starting{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.price-amount{font-family:var(--font-display);font-size:42px;font-weight:700;line-height:1;margin-bottom:16px}
+.price-card:nth-child(1) .price-amount,.price-card:nth-child(4) .price-amount{color:var(--blue)}
+.price-card.popular .price-amount{color:var(--blue)}
+.price-card:nth-child(3) .price-amount,.price-card:nth-child(5) .price-amount{color:var(--red)}
+.price-desc{font-family:var(--font-ui);font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:20px;border-top:1px solid var(--border-light);padding-top:16px}
+.price-features{list-style:none}
+.price-features li{font-family:var(--font-ui);font-size:12px;color:var(--ink-soft);padding:6px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:10px}
+.price-features li:last-child{border-bottom:none}
+.price-features li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.price-card:nth-child(1) .price-features li::before,.price-card:nth-child(4) .price-features li::before{background:var(--blue)}
+.price-card:nth-child(2) .price-features li::before{background:var(--yellow)}
+.price-card:nth-child(3) .price-features li::before,.price-card:nth-child(5) .price-features li::before{background:var(--red)}
+.price-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:24px;padding:14px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;border:2px solid transparent}
+.price-card:nth-child(1) .price-cta,.price-card:nth-child(4) .price-cta{background:var(--blue-pale);color:var(--blue);border-color:rgba(21,101,255,0.2)}
+.price-card:nth-child(1) .price-cta:hover,.price-card:nth-child(4) .price-cta:hover{background:var(--blue);color:var(--white)}
+.price-card.popular .price-cta{background:var(--blue);color:var(--white);box-shadow:0 4px 16px rgba(21,101,255,0.3)}
+.price-card.popular .price-cta:hover{background:#0f50e0;transform:translateY(-2px)}
+.price-card:nth-child(3) .price-cta,.price-card:nth-child(5) .price-cta{background:var(--red-pale);color:var(--red);border-color:rgba(232,0,30,0.2)}
+.price-card:nth-child(3) .price-cta:hover,.price-card:nth-child(5) .price-cta:hover{background:var(--red);color:var(--white)}
+
+/* EXPRESS */
+.express-card{background:var(--ink);border-radius:var(--radius-lg);padding:36px 40px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;margin-top:16px}
+.express-tag{font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px}
+.express-name{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--white);margin-bottom:8px}
+.express-desc{font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6;max-width:500px}
+.express-right{text-align:right;flex-shrink:0}
+.express-price-label{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px}
+.express-price{font-family:var(--font-display);font-size:52px;font-weight:700;color:var(--yellow);line-height:1;margin-bottom:16px}
+.express-cta{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--ink);padding:14px 28px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;white-space:nowrap}
+.express-cta:hover{background:var(--yellow-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,214,0,0.3)}
+
+/* ── LIMITED RELEASE SESSIONS ──────────────────────────── */
+.limited-section{background:var(--ink);padding:88px 40px;position:relative;overflow:hidden}
+.limited-section::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,0,0.06) 0%,transparent 70%);pointer-events:none}
+.limited-section::after{content:'';position:absolute;bottom:-150px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(21,101,255,0.08) 0%,transparent 70%);pointer-events:none}
+.limited-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.limited-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;margin-bottom:56px}
+.limited-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,214,0,0.12);color:var(--yellow);border:1.5px solid rgba(255,214,0,0.25);padding:7px 16px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:20px}
+.limited-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--yellow);animation:pulse 1.8s infinite}
+.limited-h2{font-family:var(--font-display);font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.0;color:var(--white);margin-bottom:12px}
+.limited-sub{font-family:var(--font-ui);font-size:15px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:520px}
+.limited-avail{text-align:right}
+.limited-avail-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:12px 20px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5)}
+.limited-avail-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
+
+/* Power Session Card */
+.power-card{background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.1);border-radius:var(--radius-lg);padding:40px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;margin-bottom:16px;transition:all 0.3s;position:relative;overflow:hidden}
+.power-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--yellow),var(--yellow-light))}
+.power-card:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,214,0,0.3);transform:translateY(-3px)}
+.power-card-left{}
+.power-badges{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.power-badge{font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:5px 12px;border-radius:var(--radius-pill)}
+.power-badge.yellow{background:rgba(255,214,0,0.15);color:var(--yellow);border:1px solid rgba(255,214,0,0.25)}
+.power-badge.white{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.1)}
+.power-name{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--white);margin-bottom:10px}
+.power-desc{font-family:var(--font-ui);font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:500px;margin-bottom:20px}
+.power-features{display:flex;gap:20px;flex-wrap:wrap}
+.power-feat{font-family:var(--font-ui);font-size:12px;color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:7px}
+.power-feat::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--yellow);flex-shrink:0}
+.power-card-right{text-align:right;flex-shrink:0}
+.power-price-label{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:4px}
+.power-price{font-family:var(--font-display);font-size:56px;font-weight:700;color:var(--yellow);line-height:1;margin-bottom:20px}
+.power-cta{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--ink);padding:15px 28px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:all 0.3s}
+.power-cta:hover{background:var(--yellow-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,214,0,0.35)}
+.power-cta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform 0.3s}
+.power-cta:hover svg{transform:translateX(3px)}
+
+/* Seasonal Grid */
+.seasonal-label{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:40px 0 20px;display:flex;align-items:center;gap:12px}
+.seasonal-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.07)}
+.seasonal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.seasonal-card{background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.07);border-radius:var(--radius-lg);padding:28px 24px;transition:all 0.35s;position:relative;overflow:hidden}
+.seasonal-card:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);transform:translateY(-3px)}
+.seasonal-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:0;transition:opacity 0.35s}
+.seasonal-card:nth-child(1)::after{background:var(--blue)}
+.seasonal-card:nth-child(2)::after{background:var(--yellow)}
+.seasonal-card:nth-child(3)::after{background:var(--red)}
+.seasonal-card:hover::after{opacity:1}
+.seasonal-drop-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 10px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:8px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px}
+.seasonal-icon{width:40px;height:40px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:20px}
+.seasonal-card:nth-child(1) .seasonal-icon{background:rgba(21,101,255,0.15)}
+.seasonal-card:nth-child(2) .seasonal-icon{background:rgba(255,214,0,0.12)}
+.seasonal-card:nth-child(3) .seasonal-icon{background:rgba(232,0,30,0.12)}
+.seasonal-name{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px}
+.seasonal-desc{font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:20px}
+.seasonal-cta{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.25s;padding:10px 20px;border-radius:var(--radius-pill);border:1.5px solid}
+.seasonal-card:nth-child(1) .seasonal-cta{color:var(--blue-light);border-color:rgba(21,101,255,0.3)}
+.seasonal-card:nth-child(1) .seasonal-cta:hover{background:rgba(21,101,255,0.15)}
+.seasonal-card:nth-child(2) .seasonal-cta{color:var(--yellow);border-color:rgba(255,214,0,0.3)}
+.seasonal-card:nth-child(2) .seasonal-cta:hover{background:rgba(255,214,0,0.1)}
+.seasonal-card:nth-child(3) .seasonal-cta{color:var(--red-light);border-color:rgba(232,0,30,0.3)}
+.seasonal-card:nth-child(3) .seasonal-cta:hover{background:rgba(232,0,30,0.1)}
+.seasonal-cta svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform 0.25s}
+.seasonal-cta:hover svg{transform:translateX(3px)}
+.limited-note{margin-top:32px;padding:20px 28px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius);display:flex;align-items:center;gap:16px}
+.limited-note-icon{width:32px;height:32px;border-radius:50%;background:rgba(255,214,0,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.limited-note-icon svg{width:14px;height:14px;stroke:var(--yellow);fill:none;stroke-width:2}
+.limited-note-text{font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,0.4);line-height:1.6}
+.limited-note-text strong{color:rgba(255,255,255,0.7);font-weight:700}
+
+/* ── PRINTS & KEEPSAKES ─────────────────────────────────── */
+.prints-section{background:var(--white);padding:88px 40px}
+.prints-inner{max-width:1200px;margin:0 auto}
+.prints-hero{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:72px}
+.prints-left{}
+.prints-right{position:relative}
+.prints-visual{background:linear-gradient(135deg,var(--surface) 0%,var(--surface-2) 100%);border-radius:var(--radius-lg);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:1.5px solid var(--border-light)}
+/* Stacked print mockup */
+.print-mock-stack{position:relative;width:220px;height:180px}
+.print-mock{position:absolute;border-radius:8px;background:var(--white);box-shadow:0 12px 40px rgba(13,17,23,0.12);border:6px solid var(--white)}
+.print-mock-1{width:160px;height:120px;bottom:0;left:50%;transform:translateX(-50%) rotate(-6deg);background:linear-gradient(135deg,#dde4ed,#b8c4d4)}
+.print-mock-2{width:160px;height:120px;bottom:10px;left:50%;transform:translateX(-50%) rotate(2deg);background:linear-gradient(135deg,#c8d5e8,#a0b4cc)}
+.print-mock-3{width:160px;height:120px;bottom:22px;left:50%;transform:translateX(-50%) rotate(-1deg);background:linear-gradient(135deg,#1565ff,#4d8aff);opacity:0.15}
+.prints-visual-label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver-dark);white-space:nowrap}
+/* Products grid */
+.prints-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.print-card{background:var(--surface);border:1.5px solid var(--border-light);border-radius:var(--radius-lg);padding:28px 24px;text-align:center;transition:all 0.3s;position:relative;overflow:hidden}
+.print-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.print-card:nth-child(1)::before{background:var(--blue)}
+.print-card:nth-child(2)::before{background:var(--yellow)}
+.print-card:nth-child(3)::before{background:var(--red)}
+.print-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,17,23,0.07);border-color:var(--border);background:var(--white)}
+.print-card-icon{width:52px;height:52px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.print-card:nth-child(1) .print-card-icon{background:var(--blue-pale)}
+.print-card:nth-child(2) .print-card-icon{background:var(--yellow-pale)}
+.print-card:nth-child(3) .print-card-icon{background:var(--red-pale)}
+.print-card-icon svg{width:22px;height:22px;fill:none;stroke-width:1.8}
+.print-card:nth-child(1) .print-card-icon svg{stroke:var(--blue)}
+.print-card:nth-child(2) .print-card-icon svg{stroke:var(--ink)}
+.print-card:nth-child(3) .print-card-icon svg{stroke:var(--red)}
+.print-card-name{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.print-card-desc{font-family:var(--font-ui);font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:16px}
+.print-card-avail{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:6px 14px;border-radius:var(--radius-pill);display:inline-block}
+.print-card:nth-child(1) .print-card-avail{background:var(--blue-pale);color:var(--blue)}
+.print-card:nth-child(2) .print-card-avail{background:var(--yellow-pale);color:var(--ink-mid)}
+.print-card:nth-child(3) .print-card-avail{background:var(--red-pale);color:var(--red)}
+.prints-cta-row{display:flex;align-items:center;gap:20px;padding:28px 32px;background:var(--ink);border-radius:var(--radius-lg)}
+.prints-cta-left{flex:1}
+.prints-cta-label{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+.prints-cta-title{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--white)}
+.prints-cta-sub{font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,0.45);margin-top:4px;line-height:1.6}
+.prints-cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--ink);padding:14px 28px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:all 0.3s;flex-shrink:0}
+.prints-cta-btn:hover{background:var(--yellow-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,214,0,0.3)}
+
+/* POLICY STRIP */
+.policy-strip{background:var(--ink);padding:56px 40px}
+.policy-inner{max-width:1200px;margin:0 auto}
+.policy-title{font-family:var(--font-display);font-size:clamp(28px,4vw,48px);font-weight:700;color:var(--white);margin-bottom:40px;text-align:center}
+.policy-title span{color:var(--yellow)}
+.policy-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pol-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:28px 24px;position:relative;overflow:hidden}
+.pol-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.pol-card:nth-child(1)::before{background:var(--blue)}
+.pol-card:nth-child(2)::before{background:var(--yellow)}
+.pol-card:nth-child(3)::before{background:var(--red)}
+.pol-icon{width:40px;height:40px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.pol-card:nth-child(1) .pol-icon{background:rgba(21,101,255,0.15)}
+.pol-card:nth-child(2) .pol-icon{background:rgba(255,214,0,0.15)}
+.pol-card:nth-child(3) .pol-icon{background:rgba(232,0,30,0.15)}
+.pol-icon svg{width:18px;height:18px;fill:none;stroke-width:2}
+.pol-card:nth-child(1) .pol-icon svg{stroke:var(--blue-light)}
+.pol-card:nth-child(2) .pol-icon svg{stroke:var(--yellow)}
+.pol-card:nth-child(3) .pol-icon svg{stroke:var(--red-light)}
+.pol-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--white);margin-bottom:10px}
+.pol-text{font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7}
+.pol-text strong{color:rgba(255,255,255,0.9)}
+
+/* 72HR BANNER */
+.turnaround{background:var(--blue);padding:40px;text-align:center;position:relative;overflow:hidden}
+.turnaround::before{content:'72';font-family:var(--font-display);font-size:320px;font-weight:700;color:rgba(255,255,255,0.04);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1;pointer-events:none}
+.turnaround-inner{position:relative;z-index:1}
+.turnaround-num{font-family:var(--font-display);font-size:clamp(56px,10vw,100px);font-weight:700;color:var(--white);line-height:1}
+.turnaround-num span{color:var(--yellow)}
+.turnaround-label{font-family:var(--font-ui);font-size:14px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-top:8px}
+.turnaround-sub{font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,0.5);margin-top:12px;max-width:400px;margin-left:auto;margin-right:auto}
+
+/* BOOKING FORM */
+.form-section{background:var(--white);padding:88px 40px}
+.form-section-inner{max-width:800px;margin:0 auto}
+.form-tabs{display:flex;background:var(--surface);border-radius:var(--radius-pill);padding:4px;margin-bottom:44px;gap:2px}
+.ftab{flex:1;padding:12px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-align:center;cursor:pointer;border-radius:var(--radius-pill);color:var(--ink-soft);transition:all 0.3s;background:transparent;border:none}
+.ftab.active{background:var(--blue);color:var(--white);box-shadow:0 4px 14px rgba(21,101,255,0.3)}
+.fpanel{display:none}.fpanel.active{display:block;animation:fadeUp 0.35s ease}
+.fg{margin-bottom:22px}
+.fg label{display:block;font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--surface);border:1.5px solid var(--border);padding:14px 18px;font-size:14px;color:var(--ink);font-family:var(--font-body);font-weight:400;transition:border-color 0.3s,box-shadow 0.3s;outline:none;border-radius:var(--radius);-webkit-appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(21,101,255,0.12)}
+.fg textarea{resize:none;min-height:100px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.budget-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bopt{border:1.5px solid var(--border);background:var(--surface);padding:14px;text-align:center;cursor:pointer;transition:all 0.25s;font-family:var(--font-ui);font-size:12px;font-weight:700;color:var(--ink-soft);border-radius:var(--radius)}
+.bopt:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale)}
+.bopt.sel{background:var(--blue);color:var(--white);border-color:var(--blue);box-shadow:0 4px 14px rgba(21,101,255,0.25)}
+/* Prints radio */
+.prints-radio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pr-opt{border:1.5px solid var(--border);background:var(--surface);padding:16px 12px;text-align:center;cursor:pointer;transition:all 0.25s;font-family:var(--font-ui);font-size:12px;font-weight:700;color:var(--ink-soft);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;gap:8px}
+.pr-opt-icon{font-size:20px}
+.pr-opt:hover{border-color:var(--yellow);background:var(--yellow-pale);color:var(--ink)}
+.pr-opt.sel{background:var(--yellow);color:var(--ink);border-color:var(--yellow);box-shadow:0 4px 14px rgba(255,214,0,0.3)}
+.fbtn{width:100%;background:var(--blue);color:var(--white);border:none;padding:18px;font-family:var(--font-ui);font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;border-radius:var(--radius-pill);margin-top:12px;box-shadow:0 6px 24px rgba(21,101,255,0.3);transition:all 0.3s}
+.fbtn:hover{background:#0f50e0;transform:translateY(-2px);box-shadow:0 10px 32px rgba(21,101,255,0.4)}
+.fnote{text-align:center;margin-top:14px;font-size:12px;color:var(--ink-soft);font-family:var(--font-ui)}
+.pre-select{display:inline-flex;align-items:center;gap:8px;background:var(--blue-pale);border:1.5px solid rgba(21,101,255,0.2);color:var(--blue);padding:10px 20px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:12px;font-weight:700;margin-bottom:28px}
+.pre-select svg{width:14px;height:14px;stroke:var(--blue);fill:none;stroke-width:2}
+.form-success{display:none;text-align:center;padding:60px 24px}
+.form-success.show{display:block;animation:fadeUp 0.5s ease}
+.fsucc-icon{width:72px;height:72px;background:var(--blue-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px}
+.fsucc-icon svg{width:32px;height:32px;stroke:var(--blue);fill:none;stroke-width:2}
+.fsucc-h{font-family:var(--font-display);font-size:44px;font-weight:700;color:var(--ink);margin-bottom:14px}
+.fsucc-p{font-family:var(--font-ui);font-size:16px;color:var(--ink-soft);line-height:1.7}
+
+/* FINAL CTA */
+.final-cta{background:var(--surface);padding:80px 40px;text-align:center}
+.final-cta-inner{max-width:640px;margin:0 auto}
+.final-cta h2{font-family:var(--font-display);font-size:clamp(36px,5vw,56px);font-weight:700;color:var(--ink);margin-bottom:16px;line-height:1.05}
+.final-cta h2 span{color:var(--red)}
+.final-cta p{font-family:var(--font-ui);font-size:15px;color:var(--ink-soft);margin-bottom:36px;line-height:1.7}
+.final-cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-blue{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:var(--white);padding:18px 40px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 6px 24px rgba(21,101,255,0.35);transition:all 0.3s}
+.btn-blue:hover{background:#0f50e0;transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--ink);padding:17px 36px;border-radius:var(--radius-pill);border:2px solid var(--border);font-family:var(--font-ui);font-size:14px;font-weight:600;text-decoration:none;transition:all 0.3s}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:44px 40px 28px}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.footer-logo-dot{width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.footer-logo .r{color:var(--red)}
+.footer-nav a{color:rgba(255,255,255,0.45);text-decoration:none;font-family:var(--font-ui);font-size:12px;padding:6px 12px;border-radius:var(--radius-pill);transition:all 0.2s}
+.footer-nav a:hover{color:var(--white);background:rgba(255,255,255,0.06)}
+.footer-copy{font-family:var(--font-ui);font-size:11px;color:rgba(255,255,255,0.2)}
+
+/* MOBILE */
+.mob-menu{position:fixed;inset:0;background:var(--white);z-index:998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.4,0,0.2,1)}
+.mob-menu.open{transform:translateX(0)}
+.mob-menu a{font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--ink);text-decoration:none;padding:8px 0}
+.mob-close{position:absolute;top:24px;right:28px;font-size:26px;cursor:pointer;background:none;border:none;color:var(--ink)}
+.mob-stripe{position:absolute;top:0;left:0;bottom:0;width:4px;background:linear-gradient(to bottom,var(--blue),var(--yellow),var(--red))}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.9)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:0.1s}.rd2{transition-delay:0.2s}.rd3{transition-delay:0.3s}
+
+@media(max-width:960px){
+  nav{padding:0 20px}.nav-links{display:none}.nav-ham{display:flex}
+  section,.form-section,.policy-strip,.final-cta,.limited-section,.prints-section{padding:64px 20px}
+  .page-hero{padding:120px 20px 64px}
+  .pricing-grid,.pricing-grid.two{grid-template-columns:1fr}
+  .policy-cards,.seasonal-grid,.prints-grid{grid-template-columns:1fr}
+  .express-card{grid-template-columns:1fr;text-align:center}
+  .express-right{text-align:center}
+  .power-card{grid-template-columns:1fr;gap:24px}
+  .power-card-right{text-align:left}
+  .limited-header{grid-template-columns:1fr}
+  .limited-avail{text-align:left}
+  .prints-hero{grid-template-columns:1fr;gap:40px}
+  .prints-cta-row{flex-direction:column;text-align:center;gap:16px}
+  .frow{grid-template-columns:1fr}
+  .budget-opts,.prints-radio{grid-template-columns:1fr 1fr}
+  .ph-stats{gap:24px}.ph-stat-div{display:none}
+  .sticky-book{bottom:18px;right:18px;padding:12px 20px;font-size:11px}
+}
+@media(max-width:600px){
+  .budget-opts,.prints-radio{grid-template-columns:1fr}
+  .final-cta-btns{flex-direction:column;align-items:center}
+  .power-features{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-dot"></div>Poster<span class="r">child</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#portfolio">Portfolio</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#about">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="booking.html" class="active nav-cta">Book Now</a>
+  </div>
+  <div class="nav-ham" onclick="toggleMob()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <div class="mob-stripe"></div>
+  <button class="mob-close" onclick="toggleMob()">✕</button>
+  <a href="index.html#portfolio" onclick="toggleMob()">Portfolio</a>
+  <a href="index.html#services" onclick="toggleMob()">Services</a>
+  <a href="faq.html" onclick="toggleMob()">FAQ</a>
+  <a href="#booking-form" onclick="toggleMob()" style="color:var(--blue)">Book Now →</a>
+</div>
+
+<a href="#booking-form" class="sticky-book">
+  <div class="sticky-book-dot"></div>Secure Your Date
+</a>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="ph-shapes"><div class="ph-c1"></div><div class="ph-c2"></div><div class="ph-c3"></div></div>
+  <div class="page-hero-inner">
+    <div class="ph-tag"><div class="ph-tag-dot"></div>Posterchild Media · Now Booking</div>
+    <h1 class="ph-h1">Start Your<br><span class="y">Experience</span></h1>
+    <p class="ph-sub">Every shoot is fully directed and intentionally crafted. Select your experience below and begin your booking.</p>
+    <a href="#booking-form" class="ph-cta">
+      Begin Booking
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <div class="ph-stats">
+      <div><div class="ph-stat-num blue">72hr</div><div class="ph-stat-label">Photo Delivery</div></div>
+      <div class="ph-stat-div"></div>
+      <div><div class="ph-stat-num">500+</div><div class="ph-stat-label">Sessions Shot</div></div>
+      <div class="ph-stat-div"></div>
+      <div><div class="ph-stat-num red">25%</div><div class="ph-stat-label">Deposit to Book</div></div>
+      <div class="ph-stat-div"></div>
+      <div><div class="ph-stat-num">5★</div><div class="ph-stat-label">Average Rating</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SIGNATURE PRICING ══ -->
+<section class="pricing-bg" id="packages">
+  <div class="pricing-inner">
+    <div class="reveal">
+      <div class="sec-tag">
+        <div class="sec-tag-bar" style="background:var(--blue)"></div>
+        <div class="sec-tag-text" style="color:var(--blue)">Experiences & Pricing</div>
+      </div>
+      <h2 class="sec-h2">Choose Your<br>Experience.</h2>
+      <p class="sec-sub">Every package is a fully directed creative session — not just a photoshoot. All pricing shown as starting rates.</p>
+    </div>
+
+    <div class="pricing-group-label reveal">Signature Photo Experiences</div>
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="price-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="price-name">Essential Experience</div>
+        <div class="price-starting">Starting at</div>
+        <div class="price-amount">$350</div>
+        <p class="price-desc">The perfect entry into a directed creative session. High-quality portraits with full posing guidance.</p>
+        <ul class="price-features">
+          <li>1–2 hour session</li><li>1 location</li><li>20+ edited images</li>
+          <li>72-hour delivery</li><li>Private online gallery</li>
+        </ul>
+        <a href="#booking-form" class="price-cta" onclick="preSelect('$350–$650')">Select This Experience</a>
+      </div>
+      <div class="price-card popular">
+        <div class="pop-badge">Most Popular</div>
+        <div class="price-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="price-name">Signature Experience</div>
+        <div class="price-starting">Starting at</div>
+        <div class="price-amount">$650</div>
+        <p class="price-desc">Our most booked session. Full creative direction, multiple looks, and cinematic editing throughout.</p>
+        <ul class="price-features">
+          <li>2–3 hour session</li><li>Up to 2 locations</li><li>40+ edited images</li>
+          <li>Wardrobe guidance included</li><li>72-hour delivery</li><li>Private online gallery</li>
+        </ul>
+        <a href="#booking-form" class="price-cta" onclick="preSelect('$650–$1,200')">Select This Experience</a>
+      </div>
+      <div class="price-card">
+        <div class="price-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="price-name">Editorial Experience</div>
+        <div class="price-starting">Starting at</div>
+        <div class="price-amount">$1,200</div>
+        <p class="price-desc">A full production experience. Magazine-level creative direction, concept development, and premium delivery.</p>
+        <ul class="price-features">
+          <li>Half or full day session</li><li>Multiple locations</li><li>60+ edited images</li>
+          <li>Full concept development</li><li>Styling & mood board</li><li>72-hour delivery</li>
+        </ul>
+        <a href="#booking-form" class="price-cta" onclick="preSelect('$1,200–$2,500')">Select This Experience</a>
+      </div>
+    </div>
+
+    <div class="pricing-group-label reveal">Photo + Video Experiences</div>
+    <div class="pricing-grid two reveal">
+      <div class="price-card">
+        <div class="price-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <div class="price-name">Content Package</div>
+        <div class="price-starting">Starting at</div>
+        <div class="price-amount">$900</div>
+        <p class="price-desc">Photo and video combined — ideal for social content creators, entrepreneurs, and events.</p>
+        <ul class="price-features">
+          <li>2–3 hour session</li><li>30+ edited images</li><li>Short-form video reel</li>
+          <li>Social-ready format</li><li>72-hour delivery</li>
+        </ul>
+        <a href="#booking-form" class="price-cta" onclick="preSelect('$650–$1,200')">Select This Experience</a>
+      </div>
+      <div class="price-card">
+        <div class="price-icon"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.9L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
+        <div class="price-name">Cinematic Experience</div>
+        <div class="price-starting">Starting at</div>
+        <div class="price-amount">$1,800</div>
+        <p class="price-desc">Our flagship combined package. Full editorial photography with a cinematic highlight film — built for weddings, birthdays, and major events.</p>
+        <ul class="price-features">
+          <li>Half or full day</li><li>50+ edited images</li><li>Cinematic highlight film</li>
+          <li>Full creative direction</li><li>72-hour delivery</li><li>Private gallery + video link</li>
+        </ul>
+        <a href="#booking-form" class="price-cta" onclick="preSelect('$1,200–$2,500')">Select This Experience</a>
+      </div>
+    </div>
+
+    <div class="pricing-group-label reveal">Express Sessions</div>
+    <div class="express-card reveal">
+      <div>
+        <div class="express-tag">Fast · Professional · Premium</div>
+        <div class="express-name">Express Headshots</div>
+        <p class="express-desc">Designed for entrepreneurs, creatives, and professionals who need high-quality visuals — fast. Fully directed, delivered in 72 hours.</p>
+      </div>
+      <div class="express-right">
+        <div class="express-price-label">Flat Rate</div>
+        <div class="express-price">$225</div>
+        <a href="#booking-form" class="express-cta" onclick="preSelect('$350–$650')">
+          Book Express
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LIMITED RELEASE SESSIONS ══ -->
+<div class="limited-section" id="limited-sessions">
+  <div class="limited-inner">
+    <div class="limited-header reveal">
+      <div>
+        <div class="limited-tag"><div class="limited-tag-dot"></div>Limited Release Sessions</div>
+        <h2 class="limited-h2">Select Dates.<br>Signature Quality.</h2>
+        <p class="limited-sub">Streamlined sessions offered on select dates throughout the year. The same creative direction and Posterchild standard — intentionally limited.</p>
+      </div>
+      <div class="limited-avail">
+        <div class="limited-avail-pill"><div class="limited-avail-dot"></div>Available on select dates only</div>
+      </div>
+    </div>
+
+    <!-- Power Session -->
+    <div class="power-card reveal">
+      <div class="power-card-left">
+        <div class="power-badges">
+          <div class="power-badge yellow">Limited Availability</div>
+          <div class="power-badge white">1-on-1 Session</div>
+        </div>
+        <div class="power-name">Power Session</div>
+        <p class="power-desc">A focused, high-impact session stripped down to what matters most — you, the light, and the lens. No full production team. Just intentional, directed photography at the Posterchild standard.</p>
+        <div class="power-features">
+          <div class="power-feat">1-hour session</div>
+          <div class="power-feat">Photographer only</div>
+          <div class="power-feat">1 location</div>
+          <div class="power-feat">3 edited images</div>
+          <div class="power-feat">72-hour delivery</div>
+        </div>
+      </div>
+      <div class="power-card-right">
+        <div class="power-price-label">Starting at</div>
+        <div class="power-price">$150</div>
+        <a href="#booking-form" class="power-cta" onclick="preSelect('$350–$650')">
+          Book Limited Session
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Seasonal Grid -->
+    <div class="seasonal-label reveal">Seasonal Offerings</div>
+    <div class="seasonal-grid reveal">
+      <div class="seasonal-card">
+        <div class="seasonal-drop-badge">✦ Seasonal Drop</div>
+        <div class="seasonal-icon">🎓</div>
+        <div class="seasonal-name">Prom Sessions</div>
+        <p class="seasonal-desc">Available in the weeks leading up to prom season. A streamlined way to get elevated, editorial prom photos — without the full production price tag.</p>
+        <a href="#booking-form" class="seasonal-cta" onclick="preSelect('$350–$650')">
+          Book This Session
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="seasonal-card">
+        <div class="seasonal-drop-badge">✦ Seasonal Drop</div>
+        <div class="seasonal-icon">🏆</div>
+        <div class="seasonal-name">Graduation Sessions</div>
+        <p class="seasonal-desc">Celebrate the milestone in style. Offered around graduation season, these sessions capture the achievement with the cinematic quality it deserves.</p>
+        <a href="#booking-form" class="seasonal-cta" onclick="preSelect('$350–$650')">
+          Book This Session
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="seasonal-card">
+        <div class="seasonal-drop-badge">✦ Seasonal Drop</div>
+        <div class="seasonal-icon">🌸</div>
+        <div class="seasonal-name">Mommy & Me</div>
+        <p class="seasonal-desc">A Mother's Day seasonal offering. Beautiful, directed portraits that capture the bond between mother and child — available on select spring dates.</p>
+        <a href="#booking-form" class="seasonal-cta" onclick="preSelect('$350–$650')">
+          Book This Session
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="limited-note reveal">
+      <div class="limited-note-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p class="limited-note-text">Designed for specific moments throughout the year, these sessions offer a streamlined way to experience Posterchild quality. <strong>Dates are released seasonally and fill quickly.</strong> Once a date is gone, it's gone.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRINTS & KEEPSAKES ══ -->
+<div class="prints-section" id="prints">
+  <div class="prints-inner">
+    <div class="prints-hero">
+      <div class="reveal">
+        <div class="sec-tag">
+          <div class="sec-tag-bar" style="background:var(--yellow)"></div>
+          <div class="sec-tag-text" style="color:var(--ink-soft)">Prints & Keepsakes</div>
+        </div>
+        <h2 class="sec-h2">Beyond<br>the Screen.</h2>
+        <p class="sec-sub" style="margin-bottom:28px">Your photos deserve more than a gallery link. We offer high-quality prints and framed pieces designed to live in your space — and last a lifetime.</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px;font-family:var(--font-ui);font-size:14px;color:var(--ink-soft)">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0"></div>
+            Tangible. Your memories, printed with intention.
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-family:var(--font-ui);font-size:14px;color:var(--ink-soft)">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0"></div>
+            Premium quality. Built to be displayed, not stored.
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-family:var(--font-ui);font-size:14px;color:var(--ink-soft)">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0"></div>
+            Available after every session, to order from your gallery.
+          </div>
+        </div>
+      </div>
+      <div class="reveal rd1">
+        <div class="prints-visual">
+          <div class="print-mock-stack">
+            <div class="print-mock print-mock-1"></div>
+            <div class="print-mock print-mock-2"></div>
+            <div class="print-mock print-mock-3"></div>
+          </div>
+          <div class="prints-visual-label">Fine Prints · Framed Pieces · Collections</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prints-grid reveal">
+      <div class="print-card">
+        <div class="print-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+        </div>
+        <div class="print-card-name">Fine Prints</div>
+        <p class="print-card-desc">Museum-quality archival prints in a range of sizes. Designed to be displayed on walls, not stored in folders.</p>
+        <div class="print-card-avail">Available after your session</div>
+      </div>
+      <div class="print-card">
+        <div class="print-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+        </div>
+        <div class="print-card-name">Framed Prints</div>
+        <p class="print-card-desc">Ready-to-hang framed prints that arrive complete — no trips to the frame store. Gallery-ready from the box.</p>
+        <div class="print-card-avail">Available after your session</div>
+      </div>
+      <div class="print-card">
+        <div class="print-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        </div>
+        <div class="print-card-name">Print Collections</div>
+        <p class="print-card-desc">Curated sets of your best images — formatted for gifting, storytelling, or wall displays. A complete, tangible experience.</p>
+        <div class="print-card-avail">Available after your session</div>
+      </div>
+    </div>
+
+    <div class="prints-cta-row reveal">
+      <div class="prints-cta-left">
+        <div class="prints-cta-label">How It Works</div>
+        <div class="prints-cta-title">Offered after gallery delivery.</div>
+        <p class="prints-cta-sub">Once your edited gallery is delivered, you'll have the option to order prints, framed pieces, and collections directly. No pressure — just an option to take your photos further.</p>
+      </div>
+      <a href="#booking-form" class="prints-cta-btn">
+        Book Your Session First
+        <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- 72HR BANNER -->
+<div class="turnaround">
+  <div class="turnaround-inner">
+    <div class="turnaround-num">72<span>hrs</span></div>
+    <div class="turnaround-label">Guaranteed Photo Delivery</div>
+    <p class="turnaround-sub">Every session is edited and delivered within 72 hours of your shoot date. Fast, professional, and always gallery-ready.</p>
+  </div>
+</div>
+
+<!-- BOOKING POLICY -->
+<div class="policy-strip">
+  <div class="policy-inner">
+    <h2 class="policy-title reveal">Booking <span>Policy.</span></h2>
+    <div class="policy-cards">
+      <div class="pol-card reveal">
+        <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="pol-title">25% Deposit Required</div>
+        <p class="pol-text">A <strong>25% deposit is required</strong> to secure your booking. Your date is not held until the deposit is received.</p>
+      </div>
+      <div class="pol-card reveal rd1">
+        <div class="pol-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div class="pol-title">Balance Due at Shoot</div>
+        <p class="pol-text">The <strong>remaining balance is due before or on your shoot day.</strong> All major payment methods accepted.</p>
+      </div>
+      <div class="pol-card reveal rd2">
+        <div class="pol-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="pol-title">Limited Availability</div>
+        <p class="pol-text">Dates fill quickly. <strong>Once your deposit is submitted,</strong> your spot is locked in. Reach out early.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING FORM -->
+<section class="form-section" id="booking-form">
+  <div class="form-section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:48px">
+      <div class="sec-tag" style="justify-content:center">
+        <div class="sec-tag-bar" style="background:var(--red)"></div>
+        <div class="sec-tag-text" style="color:var(--red)">Secure Your Date</div>
+      </div>
+      <h2 class="sec-h2">Ready to Begin?</h2>
+      <p class="sec-sub" style="margin:0 auto">Fill out the form below and we'll be in touch within 24 hours to confirm your booking.</p>
+    </div>
+
+    <div id="formWrap">
+      <div class="form-tabs">
+        <button class="ftab active" onclick="goStep(1)">01 · Your Info</button>
+        <button class="ftab" onclick="goStep(2)">02 · Shoot Details</button>
+        <button class="ftab" onclick="goStep(3)">03 · Vision & Investment</button>
+      </div>
+
+      <div class="fpanel active" id="step1">
+        <div class="frow">
+          <div class="fg"><label>First Name</label><input type="text" id="fname" placeholder="Your first name"></div>
+          <div class="fg"><label>Last Name</label><input type="text" id="lname" placeholder="Your last name"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Email</label><input type="email" id="email" placeholder="your@email.com"></div>
+          <div class="fg"><label>Phone</label><input type="tel" id="phone" placeholder="+1 (000) 000-0000"></div>
+        </div>
+        <div class="fg"><label>How did you hear about us?</label>
+          <select id="source"><option value="">Select one</option><option>Instagram</option><option>Referral from a friend</option><option>Google search</option><option>TikTok</option><option>Other</option></select>
+        </div>
+        <button class="fbtn" onclick="goStep(2)">Continue — Shoot Details →</button>
+      </div>
+
+      <div class="fpanel" id="step2">
+        <div class="frow">
+          <div class="fg"><label>Session Type</label>
+            <select id="type"><option value="">Select type</option><option>Wedding</option><option>Birthday</option><option>Prom</option><option>Graduation</option><option>Editorial / Creative</option><option>Brand / Commercial</option><option>Express Headshots</option><option>Power Session (Limited)</option><option>Seasonal Session</option><option>Other</option></select>
+          </div>
+          <div class="fg"><label>Preferred Date</label><input type="date" id="pdate"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Location / City</label><input type="text" id="plocation" placeholder="City or specific venue"></div>
+          <div class="fg"><label>Number of People</label>
+            <select id="people"><option value="">Select</option><option>Just me</option><option>2–4 people</option><option>5–10 people</option><option>10+ people</option></select>
+          </div>
+        </div>
+        <div class="fg"><label>Do you need videography?</label>
+          <select id="video"><option value="">Select</option><option>Photography only</option><option>Videography only</option><option>Both — Photo + Video</option></select>
+        </div>
+        <button class="fbtn" onclick="goStep(3)">Continue — Vision & Investment →</button>
+      </div>
+
+      <div class="fpanel" id="step3">
+        <div id="preSelectBadge" style="display:none">
+          <div class="pre-select">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Experience selected: <strong id="preSelectLabel"></strong>
+          </div>
+        </div>
+        <div class="fg"><label>Describe your vision</label>
+          <textarea id="vision" placeholder="Tell us the mood, energy, and story you want to tell..."></textarea>
+        </div>
+        <div class="fg"><label>References or inspiration?</label>
+          <textarea id="inspo" placeholder="Instagram accounts, Pinterest boards, aesthetic vibes..." style="min-height:80px"></textarea>
+        </div>
+        <div class="fg">
+          <label>Select Your Investment Level <span style="color:var(--red);font-size:10px">(Required)</span></label>
+          <div class="budget-opts" id="budgetOpts">
+            <div class="bopt" onclick="pickBudget(this,'$350–$650')">$350–$650</div>
+            <div class="bopt" onclick="pickBudget(this,'$650–$1,200')">$650–$1,200</div>
+            <div class="bopt" onclick="pickBudget(this,'$1,200–$2,500')">$1,200–$2,500</div>
+            <div class="bopt" onclick="pickBudget(this,'$2,500–$5,000')">$2,500–$5,000</div>
+            <div class="bopt" onclick="pickBudget(this,'$5,000+')">$5,000+</div>
+            <div class="bopt" onclick="pickBudget(this,'Not Sure Yet')">Not Sure Yet</div>
+          </div>
+        </div>
+        <!-- PRINTS UPSELL QUESTION -->
+        <div class="fg">
+          <label>Are you interested in prints or framed photos?</label>
+          <div class="prints-radio" id="printsOpts">
+            <div class="pr-opt" onclick="pickPrints(this,'Yes')">
+              <div class="pr-opt-icon">🖼</div>Yes, I'm interested
+            </div>
+            <div class="pr-opt" onclick="pickPrints(this,'Maybe')">
+              <div class="pr-opt-icon">💭</div>Maybe — tell me more
+            </div>
+            <div class="pr-opt" onclick="pickPrints(this,'Not at the moment')">
+              <div class="pr-opt-icon">👋</div>Not at the moment
+            </div>
+          </div>
+        </div>
+        <div class="fg"><label>What experience are you looking for?</label>
+          <textarea id="expField" placeholder="Intimate and personal? Bold and editorial? Romantic and cinematic?" style="min-height:80px"></textarea>
+        </div>
+        <button class="fbtn" onclick="submitForm()">Submit Inquiry — Let's Create →</button>
+        <p class="fnote">A 25% deposit will be required to secure your date. We respond within 24 hours.</p>
+      </div>
+    </div>
+
+    <div class="form-success" id="formSuccess">
+      <div class="fsucc-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <h3 class="fsucc-h">Inquiry Received.</h3>
+      <p class="fsucc-p">Your shoot request has been received.<br>Let's bring your vision to life.<br><br><strong style="font-weight:700;color:var(--ink)">We'll be in touch within 24 hours.</strong></p>
+      <div style="margin-top:44px;display:flex;flex-direction:column;align-items:center;gap:10px">
+        <span style="font-family:var(--font-ui);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft)">While you wait, follow along</span>
+        <a href="https://instagram.com/posterchildmedia" target="_blank" style="color:var(--blue);font-family:var(--font-ui);font-size:14px;font-weight:700;text-decoration:none">@posterchildmedia →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <div class="final-cta-inner reveal">
+    <h2>Limited availability.<br><span>Serious inquiries only.</span></h2>
+    <p>Dates fill quickly. Once your deposit is received, your spot is locked in. Don't wait.</p>
+    <div class="final-cta-btns">
+      <a href="#booking-form" class="btn-blue">Secure Your Date <svg style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="faq.html" class="btn-outline">Read the FAQ</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-row">
+    <div class="footer-logo" style="color:var(--white)"><div class="footer-logo-dot"></div>Poster<span class="r">child</span> Media</div>
+    <nav class="footer-nav" style="display:flex;gap:4px;flex-wrap:wrap">
+      <a href="index.html">Home</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#services">Services</a>
+      <a href="faq.html">FAQ</a>
+      <a href="booking.html">Book</a>
+    </nav>
+    <div class="footer-copy">© 2025 Posterchild Media · Jimmy Easton</div>
+  </div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function ar(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar)})();
+document.querySelectorAll('a,button,.bopt,.price-card,.seasonal-card,.print-card,.power-card,.pr-opt').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.classList.add('hov');ring.classList.add('hov')});
+  el.addEventListener('mouseleave',()=>{cur.classList.remove('hov');ring.classList.remove('hov')});
+});
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50));
+function toggleMob(){document.getElementById('mobMenu').classList.toggle('open')}
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');ro.unobserve(x.target)}}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(r=>ro.observe(r));
+
+let budget='', prints='';
+function goStep(n){
+  document.querySelectorAll('.fpanel').forEach((p,i)=>p.classList.toggle('active',i===n-1));
+  document.querySelectorAll('.ftab').forEach((t,i)=>t.classList.toggle('active',i===n-1));
+  document.getElementById('booking-form').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function pickBudget(el,val){
+  document.querySelectorAll('.bopt').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');budget=val;
+}
+function pickPrints(el,val){
+  document.querySelectorAll('.pr-opt').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');prints=val;
+}
+function preSelect(val){
+  budget=val;
+  goStep(3);
+  document.querySelectorAll('.bopt').forEach(b=>{
+    b.classList.remove('sel');
+    if(b.textContent.trim()===val)b.classList.add('sel');
+  });
+  const badge=document.getElementById('preSelectBadge');
+  document.getElementById('preSelectLabel').textContent=val;
+  badge.style.display='block';
+  setTimeout(()=>document.getElementById('booking-form').scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+async function submitForm(){
+  const fname=document.getElementById('fname').value.trim();
+  const lname=document.getElementById('lname').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const type=document.getElementById('type').value;
+  if(!fname){alert('Please enter your name.');return}
+  if(!email){alert('Please enter your email.');return}
+  if(!type){alert('Please select a session type.');return}
+  if(!budget){alert('Please select your investment level.');return}
+  const data={
+    _subject:'New Posterchild Media Booking Inquiry',
+    _template:'table',
+    _captcha:'false',
+    _autoresponse:'Thank you for contacting Posterchild Media! We received your booking request and will reach out within 24 hours to discuss your vision, confirm availability, and reserve your session.',
+    _next: window.location.href,
+    submitted_at:new Date().toLocaleString(),
+    first_name:fname,
+    last_name:lname,
+    email,
+    phone:document.getElementById('phone').value.trim(),
+    source:document.getElementById('source').value,
+    session_type:type,
+    preferred_date:document.getElementById('pdate').value,
+    location:document.getElementById('plocation').value.trim(),
+    people:document.getElementById('people').value,
+    video:document.getElementById('video').value,
+    vision:document.getElementById('vision').value.trim(),
+    inspiration:document.getElementById('inspo').value.trim(),
+    investment_level:budget,
+    prints_interest:prints,
+    experience:document.getElementById('expField').value.trim()
+  };
+  try{
+    await fetch('https://formsubmit.co/ajax/amvlgam@gmail.com',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(data)
+    });
+  }catch(e){
+    const body=Object.entries(data).map(([k,v])=>`${k}: ${v||''}`).join('%0D%0A');
+    window.location.href=`mailto:amvlgam@gmail.com?subject=New Posterchild Media Booking Inquiry&body=${body}`;
+  }
+  document.getElementById('formWrap').style.display='none';
+  document.getElementById('formSuccess').classList.add('show');
+  document.getElementById('booking-form').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>
