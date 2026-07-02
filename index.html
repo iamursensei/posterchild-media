@@ -20,27 +20,27 @@ const SITE_CONFIG = {
   name:      "Jimmy Easton",
   brand:     "Posterchild Media",
   city:      "Atlanta, GA",
-  email:     "hello@posterchildmedia.com",
+  email:     "amvlgam@gmail.com",
   instagram: "posterchildmedia",
   stats: [
     { num: "500+", label: "Sessions Shot"       },
-    { num: "100%", label: "Client Satisfaction" },
-    { num: "5★",   label: "Average Rating"      },
-    { num: "7+",   label: "Years Experience"    },
+    { num: "ATL",  label: "Based in Atlanta"    },
+    { num: "5★",   label: "Client Experience"   },
+    { num: "72hr", label: "Fast Turnaround"     },
   ],
-  heroImage:  "",   // e.g. "hero.jpg"
-  aboutImage: "",   // e.g. "jimmy.jpg"
+  heroImage:  "images/wedding-hero.jpg",
+  aboutImage: "images/jimmy-portrait.jpg",
   portfolio: [
-    { file: "",  category: "Weddings",    title: "A Love Story, Directed."  },
-    { file: "",  category: "Editorial",   title: "Fashion Forward."         },
-    { file: "",  category: "Portraits",   title: "Confidence Captured."     },
-    { file: "",  category: "Prom & Grad", title: "Your Night, Elevated."    },
-    { file: "",  category: "Birthdays",   title: "Celebrate in Style."      },
-    { file: "",  category: "Film",        title: "Motion & Memory."         },
+    { file: "images/wedding-hero.jpg", category: "Weddings",    title: "A Love Story, Directed."  },
+    { file: "images/editorial-beauty.jpg", category: "Editorial",   title: "Fashion Forward."         },
+    { file: "images/prom-luxury.jpg", category: "Prom & Grad", title: "Your Night, Elevated."    },
+    { file: "images/Orange-truck-couple.jpg", category: "Couples", title: "Chemistry in Color."      },
+    { file: "images/Birthday-portrait.jpg", category: "Birthdays",   title: "Celebrate in Style."      },
+    { file: "images/IMG_9401_Facetune_10-12-2021-09-34-33.jpg", category: "Film",        title: "Motion & Memory."         },
   ],
   testimonials: [
     { text: "Jimmy made me feel like an actual model. Every single photo came out exactly how I imagined, but better.", author: "Aaliyah M.", role: "Birthday Session · Atlanta, GA" },
-    { text: "Our wedding photos look like they belong in a magazine. The whole experience was seamless and genuinely unforgettable.", author: "Jasmine & Darius W.", role: "Wedding · Summer 2024" },
+    { text: "Our wedding photos look like they belong in a magazine. The whole experience was seamless and genuinely unforgettable.", author: "Jasmine & Darius W.", role: "Wedding · Atlanta, GA" },
     { text: "Booked him for prom and it was the best decision I made. Everyone was asking who took my photos.", author: "Kayla T.", role: "Prom Session" },
     { text: "I was nervous and didn't know how to pose. Jimmy had me comfortable within 5 minutes. The photos turned out cinematic.", author: "Marcus J.", role: "Graduation Session" },
   ],
@@ -89,6 +89,16 @@ const SITE_CONFIG = {
 
 html{scroll-behavior:smooth}
 body{background:var(--white);color:var(--ink);font-family:var(--font-body);font-weight:400;overflow-x:hidden;cursor:none}
+
+/* Production cleanup */
+.edit-fab,.edit-panel{display:none!important}
+body{cursor:auto}
+.cursor,.cursor-ring{display:none!important}
+.pi:nth-child(3) img{object-position:center 42%}
+.pi:nth-child(4) img{object-position:center center}
+.pi:nth-child(5) img{object-position:center 38%}
+.about-img-inner img{object-position:center center}
+.hero-stripe img{object-position:center center}
 
 /* ── CURSOR ── */
 .cursor{position:fixed;width:10px;height:10px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform 0.1s,background 0.2s}
@@ -415,7 +425,7 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   <div class="nav-links">
     <a href="index.html#portfolio">Portfolio</a>
     <a href="index.html#services">Services</a>
-    <a href="index.html#about">About</a>
+    <a href="index.html#about">Meet the Director</a>
     <a href="faq.html">FAQ</a>
     <a href="booking.html" class="nav-cta">Book Now</a>
   </div>
@@ -427,7 +437,7 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   <button class="mob-close" onclick="toggleMob()">✕</button>
   <a href="index.html#portfolio" onclick="toggleMob()">Portfolio</a>
   <a href="index.html#services" onclick="toggleMob()">Services</a>
-  <a href="index.html#about" onclick="toggleMob()">About</a>
+  <a href="index.html#about" onclick="toggleMob()">Meet the Director</a>
   <a href="booking.html" onclick="toggleMob()">Book Now →</a><a href="faq.html" onclick="toggleMob()">FAQ</a>
 </div>
 
@@ -506,7 +516,7 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
     <div class="reveal reveal-d2">
       <div class="section-tag">
         <div class="section-tag-bar" style="background:var(--blue)"></div>
-        <div class="section-tag-text" style="color:var(--blue)">The Director</div>
+        <div class="section-tag-text" style="color:var(--blue)">Meet the Director</div>
       </div>
       <h2 class="section-h2">Every frame<br>is intentional.</h2>
       <div class="about-text">
@@ -713,7 +723,7 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Navigate</div>
-      <a href="index.html#portfolio">Portfolio</a><a href="index.html#services">Services</a><a href="index.html#about">About</a><a href="booking.html">Book Now</a>
+      <a href="index.html#portfolio">Portfolio</a><a href="index.html#services">Services</a><a href="index.html#about">Meet the Director</a><a href="booking.html">Book Now</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Sessions</div>
@@ -728,7 +738,7 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   </div>
   <div class="footer-bottom">
     <div class="footer-copy" id="footerCopy"></div>
-    <div class="footer-status"><div class="footer-status-dot"></div>Now Booking 2025</div>
+    <div class="footer-status"><div class="footer-status-dot"></div>Now Booking 2026</div>
   </div>
 </footer>
 
@@ -771,7 +781,7 @@ const igUrl = 'https://instagram.com/' + C.instagram;
 document.getElementById('heroBadge').textContent   = C.name + ' · ' + C.brand;
 document.getElementById('aboutBadgeTL').textContent = C.name;
 document.getElementById('cityLabel').textContent    = C.city;
-document.getElementById('footerCopy').textContent   = '© 2025 ' + C.brand + ' · ' + C.name + ' · All Rights Reserved';
+document.getElementById('footerCopy').textContent   = '© 2026 ' + C.brand + ' · ' + C.name + ' · All Rights Reserved';
 document.getElementById('footerEmailLink').href      = 'mailto:' + C.email;
 document.getElementById('footerEmailLink').textContent = C.email;
 document.getElementById('footerIGLink').href         = igUrl;
