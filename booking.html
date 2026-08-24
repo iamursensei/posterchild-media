@@ -256,23 +256,18 @@ section{padding:88px 40px}
 .policy-inner{max-width:1200px;margin:0 auto}
 .policy-title{font-family:var(--font-display);font-size:clamp(28px,4vw,48px);font-weight:700;color:var(--white);margin-bottom:40px;text-align:center}
 .policy-title span{color:var(--yellow)}
-.policy-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.pol-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:28px 24px;position:relative;overflow:hidden}
-.pol-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.pol-card:nth-child(1)::before{background:var(--blue)}
-.pol-card:nth-child(2)::before{background:var(--yellow)}
-.pol-card:nth-child(3)::before{background:var(--red)}
-.pol-icon{width:40px;height:40px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.pol-card:nth-child(1) .pol-icon{background:rgba(21,101,255,0.15)}
-.pol-card:nth-child(2) .pol-icon{background:rgba(255,214,0,0.15)}
-.pol-card:nth-child(3) .pol-icon{background:rgba(232,0,30,0.15)}
-.pol-icon svg{width:18px;height:18px;fill:none;stroke-width:2}
-.pol-card:nth-child(1) .pol-icon svg{stroke:var(--blue-light)}
-.pol-card:nth-child(2) .pol-icon svg{stroke:var(--yellow)}
-.pol-card:nth-child(3) .pol-icon svg{stroke:var(--red-light)}
-.pol-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--white);margin-bottom:10px}
-.pol-text{font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7}
-.pol-text strong{color:rgba(255,255,255,0.9)}
+
+/* Booking & Production Details accordion */
+.bpd-acc{border-top:1px solid rgba(255,255,255,0.1);max-width:900px;margin:0 auto}
+.bpd-item{border-bottom:1px solid rgba(255,255,255,0.1)}
+.bpd-item summary{list-style:none;cursor:pointer;padding:20px 4px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--font-ui);font-size:13px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.8)}
+.bpd-item summary::-webkit-details-marker{display:none}
+.bpd-item summary::after{content:'+';font-family:var(--font-body);font-size:20px;font-weight:300;color:rgba(255,255,255,0.4);transition:transform 0.25s;flex-shrink:0}
+.bpd-item[open] summary::after{transform:rotate(45deg)}
+.bpd-item[open] summary{color:var(--white)}
+.bpd-body{padding:0 4px 24px;font-family:var(--font-ui);font-size:13px;line-height:1.8;color:rgba(255,255,255,0.5)}
+.bpd-body p{margin-bottom:10px}
+.bpd-body p:last-child{margin-bottom:0}
 
 /* 72HR BANNER */
 .turnaround{background:var(--blue);padding:40px;text-align:center;position:relative;overflow:hidden}
@@ -359,7 +354,8 @@ footer{background:var(--ink);padding:44px 40px 28px}
   section,.form-section,.policy-strip,.final-cta,.limited-section,.prints-section{padding:64px 20px}
   .page-hero{padding:120px 20px 64px}
   .pricing-grid,.pricing-grid.two{grid-template-columns:1fr}
-  .policy-cards,.seasonal-grid,.prints-grid{grid-template-columns:1fr}
+  .seasonal-grid,.prints-grid{grid-template-columns:1fr}
+  .bpd-item summary{font-size:12px}
   .express-card{grid-template-columns:1fr;text-align:center}
   .express-right{text-align:center}
   .power-card{grid-template-columns:1fr;gap:24px}
@@ -447,91 +443,99 @@ footer{background:var(--ink);padding:44px 40px 28px}
       <p class="sec-sub">Every package is a fully directed creative session — not just a photoshoot. All pricing shown as starting rates.</p>
     </div>
 
-    <div class="pricing-group-label reveal">Signature Photo Experiences</div>
+    <div class="pricing-group-label reveal">Core Services</div>
     <div class="pricing-grid reveal">
       <div class="price-card">
         <div class="price-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-        <div class="price-name">Essential Experience</div>
+        <div class="price-name">Portraits & Milestones</div>
         <div class="price-starting">Starting at</div>
-        <div class="price-amount">$350</div>
-        <p class="price-desc">The perfect entry into a directed creative session. High-quality portraits with full posing guidance.</p>
+        <div class="price-amount">$200</div>
+        <p class="price-desc">Editorial portraits, graduations, birthdays, personal branding, lifestyle sessions, and milestone photography with a directed creative approach.</p>
         <ul class="price-features">
-          <li>1–2 hour session</li><li>1 location</li><li>20+ edited images</li>
-          <li>72-hour delivery</li><li>Private online gallery</li>
+          <li>Editorial & lifestyle portraits</li><li>Graduations & birthdays</li><li>Personal branding sessions</li>
+          <li>Promo/mini sessions offered seasonally at separate pricing</li>
         </ul>
-        <a href="#booking-form" class="price-cta" onclick="preSelect('$350–$650')">Select This Experience</a>
+        <a href="#booking-form" class="price-cta" onclick="selectService('Portraits & Milestones','$200–$500')">Book a Session</a>
       </div>
       <div class="price-card popular">
-        <div class="pop-badge">Most Popular</div>
+        <div class="pop-badge">3-Hour Minimum</div>
         <div class="price-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <div class="price-name">Signature Experience</div>
+        <div class="price-name">Events</div>
         <div class="price-starting">Starting at</div>
-        <div class="price-amount">$650</div>
-        <p class="price-desc">Our most booked session. Full creative direction, multiple looks, and cinematic editing throughout.</p>
+        <div class="price-amount">$125/hr</div>
+        <p class="price-desc">Photography and creative event coverage for birthdays, graduations, celebrations, launches, networking events, brand activations, and other special occasions.</p>
         <ul class="price-features">
-          <li>2–3 hour session</li><li>Up to 2 locations</li><li>40+ edited images</li>
-          <li>Wardrobe guidance included</li><li>72-hour delivery</li><li>Private online gallery</li>
+          <li>3-hour minimum</li><li>Full event coverage</li><li>72-hour delivery</li><li>Private online gallery</li>
         </ul>
-        <a href="#booking-form" class="price-cta" onclick="preSelect('$650–$1,200')">Select This Experience</a>
+        <a href="#booking-form" class="price-cta" onclick="selectService('Events','$500–$1,000')">Plan Your Event</a>
       </div>
       <div class="price-card">
         <div class="price-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><circle cx="12" cy="12" r="3"/></svg></div>
-        <div class="price-name">Editorial Experience</div>
+        <div class="price-name">Corporate & Commercial</div>
         <div class="price-starting">Starting at</div>
-        <div class="price-amount">$1,200</div>
-        <p class="price-desc">A full production experience. Magazine-level creative direction, concept development, and premium delivery.</p>
+        <div class="price-amount">$750+</div>
+        <p class="price-desc">Visual production for businesses, brands, entrepreneurs, organizations, campaigns, corporate events, branded content, promotional media, and marketing initiatives.</p>
         <ul class="price-features">
-          <li>Half or full day session</li><li>Multiple locations</li><li>60+ edited images</li>
-          <li>Full concept development</li><li>Styling & mood board</li><li>72-hour delivery</li>
+          <li>Half Day (up to 4hrs): $750+</li><li>Full Day (up to 8hrs): $1,250+</li>
+          <li>Commercial usage & licensing quoted separately</li>
         </ul>
-        <a href="#booking-form" class="price-cta" onclick="preSelect('$1,200–$2,500')">Select This Experience</a>
+        <a href="#booking-form" class="price-cta" onclick="selectService('Corporate & Commercial','$500–$1,000')">Request a Quote</a>
       </div>
     </div>
 
-    <div class="pricing-group-label reveal">Photo + Video Experiences</div>
+    <div class="pricing-group-label reveal">Production & Direction</div>
     <div class="pricing-grid two reveal">
       <div class="price-card">
-        <div class="price-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-        <div class="price-name">Content Package</div>
+        <div class="price-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <div class="price-name">Creative Direction & Production</div>
         <div class="price-starting">Starting at</div>
-        <div class="price-amount">$900</div>
-        <p class="price-desc">Photo and video combined — ideal for social content creators, entrepreneurs, and events.</p>
+        <div class="price-amount">$100/hr</div>
+        <p class="price-desc">Concept development, visual strategy, styling direction, shot planning, talent direction, production oversight, and on-set creative leadership.</p>
         <ul class="price-features">
-          <li>2–3 hour session</li><li>30+ edited images</li><li>Short-form video reel</li>
-          <li>Social-ready format</li><li>72-hour delivery</li>
+          <li>2-hour minimum</li><li>Half Day (up to 4hrs): $500+</li><li>Full Day (up to 8hrs): $900+</li>
+          <li>Team / Campaign Productions: Custom Quote</li>
         </ul>
-        <a href="#booking-form" class="price-cta" onclick="preSelect('$650–$1,200')">Select This Experience</a>
+        <a href="#booking-form" class="price-cta" onclick="selectService('Creative Direction & Production','$200–$500')">Start a Project</a>
       </div>
       <div class="price-card">
-        <div class="price-icon"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.9L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
-        <div class="price-name">Cinematic Experience</div>
+        <div class="price-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 8h22"/></svg></div>
+        <div class="price-name">Real Estate Media</div>
         <div class="price-starting">Starting at</div>
-        <div class="price-amount">$1,800</div>
-        <p class="price-desc">Our flagship combined package. Full editorial photography with a cinematic highlight film — built for weddings, birthdays, and major events.</p>
+        <div class="price-amount">$350+</div>
+        <p class="price-desc">Elevated real estate photography and visual production for agents, developers, property owners, builders, and luxury listings.</p>
         <ul class="price-features">
-          <li>Half or full day</li><li>50+ edited images</li><li>Cinematic highlight film</li>
-          <li>Full creative direction</li><li>72-hour delivery</li><li>Private gallery + video link</li>
+          <li>Standard Property: $350+</li><li>Luxury Property: $650+</li>
+          <li>Listing photos, walkthroughs, social content, agent branding, drone (where available)</li>
+          <li>Final pricing depends on scope — not all deliverables included at base price</li>
         </ul>
-        <a href="#booking-form" class="price-cta" onclick="preSelect('$1,200–$2,500')">Select This Experience</a>
+        <a href="#booking-form" class="price-cta" onclick="selectService('Real Estate Media','$200–$500')">Book Property Media</a>
       </div>
     </div>
 
-    <div class="pricing-group-label reveal">Express Sessions</div>
-    <div class="express-card reveal">
-      <div>
-        <div class="express-tag">Fast · Professional · Premium</div>
-        <div class="express-name">Express Headshots</div>
-        <p class="express-desc">Designed for entrepreneurs, creatives, and professionals who need high-quality visuals — fast. Fully directed, delivered in 72 hours.</p>
+    <div class="pricing-group-label reveal">Post-Production</div>
+    <div class="pricing-grid reveal">
+      <div class="price-card" style="text-align:left">
+        <div class="price-name" style="font-size:18px">Photo Retouching</div>
+        <div class="price-starting">Starting at</div>
+        <div class="price-amount" style="font-size:28px">$40/image</div>
+        <p class="price-desc" style="border-top:none;padding-top:0">Custom gallery pricing available.</p>
       </div>
-      <div class="express-right">
-        <div class="express-price-label">Flat Rate</div>
-        <div class="express-price">$225</div>
-        <a href="#booking-form" class="express-cta" onclick="preSelect('$350–$650')">
-          Book Express
-          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="price-card" style="text-align:left">
+        <div class="price-name" style="font-size:18px">Video Editing</div>
+        <div class="price-starting">Starting at</div>
+        <div class="price-amount" style="font-size:28px">$100/hr</div>
+        <p class="price-desc" style="border-top:none;padding-top:0">Flat project pricing available based on scope.</p>
+      </div>
+      <div class="price-card" style="text-align:left">
+        <div class="price-name" style="font-size:18px">Additional Revisions</div>
+        <div class="price-starting">Rate</div>
+        <div class="price-amount" style="font-size:28px">$100/hr</div>
+        <p class="price-desc" style="border-top:none;padding-top:0">One-hour minimum after included revisions are exhausted.</p>
       </div>
     </div>
+    <p style="font-family:var(--font-ui);font-size:12px;color:var(--ink-soft);line-height:1.7;margin-top:20px;max-width:720px">Editing included with a package applies only to the deliverables specifically stated in the client's proposal or project agreement.</p>
+
+    <p style="font-family:var(--font-ui);font-size:11px;color:var(--silver-dark);line-height:1.7;margin-top:36px;max-width:900px;padding-top:20px;border-top:1.5px solid var(--border-light)">All listed rates are starting prices and are provided as general booking guidance. Final pricing is determined by project scope, coverage time, deliverables, location, production requirements, usage/licensing, crew, equipment, and post-production needs. A custom quote may be required before booking.</p>
   </div>
 </section>
 
@@ -542,7 +546,7 @@ footer{background:var(--ink);padding:44px 40px 28px}
       <div>
         <div class="limited-tag"><div class="limited-tag-dot"></div>Limited Release Sessions</div>
         <h2 class="limited-h2">Select Dates.<br>Signature Quality.</h2>
-        <p class="limited-sub">Streamlined sessions offered on select dates throughout the year. The same creative direction and Posterchild standard — intentionally limited.</p>
+        <p class="limited-sub">Promotional mini-sessions within Portraits & Milestones, offered on select dates throughout the year at limited-time campaign pricing — separate from our standard listed rates above. The same creative direction and Posterchild standard — intentionally limited.</p>
       </div>
       <div class="limited-avail">
         <div class="limited-avail-pill"><div class="limited-avail-dot"></div>Available on select dates only</div>
@@ -569,7 +573,7 @@ footer{background:var(--ink);padding:44px 40px 28px}
       <div class="power-card-right">
         <div class="power-price-label">Starting at</div>
         <div class="power-price">$150</div>
-        <a href="#booking-form" class="power-cta" onclick="preSelect('$350–$650')">
+        <a href="#booking-form" class="power-cta" onclick="selectService('Portraits & Milestones','$200–$500')">
           Book Limited Session
           <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -584,7 +588,7 @@ footer{background:var(--ink);padding:44px 40px 28px}
         <div class="seasonal-icon">🎓</div>
         <div class="seasonal-name">Prom Sessions</div>
         <p class="seasonal-desc">Available in the weeks leading up to prom season. A streamlined way to get elevated, editorial prom photos — without the full production price tag.</p>
-        <a href="#booking-form" class="seasonal-cta" onclick="preSelect('$350–$650')">
+        <a href="#booking-form" class="seasonal-cta" onclick="selectService('Portraits & Milestones','$200–$500')">
           Book This Session
           <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -594,7 +598,7 @@ footer{background:var(--ink);padding:44px 40px 28px}
         <div class="seasonal-icon">🏆</div>
         <div class="seasonal-name">Graduation Sessions</div>
         <p class="seasonal-desc">Celebrate the milestone in style. Offered around graduation season, these sessions capture the achievement with the cinematic quality it deserves.</p>
-        <a href="#booking-form" class="seasonal-cta" onclick="preSelect('$350–$650')">
+        <a href="#booking-form" class="seasonal-cta" onclick="selectService('Portraits & Milestones','$200–$500')">
           Book This Session
           <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -604,7 +608,7 @@ footer{background:var(--ink);padding:44px 40px 28px}
         <div class="seasonal-icon">🌸</div>
         <div class="seasonal-name">Mommy & Me</div>
         <p class="seasonal-desc">A Mother's Day seasonal offering. Beautiful, directed portraits that capture the bond between mother and child — available on select spring dates.</p>
-        <a href="#booking-form" class="seasonal-cta" onclick="preSelect('$350–$650')">
+        <a href="#booking-form" class="seasonal-cta" onclick="selectService('Portraits & Milestones','$200–$500')">
           Book This Session
           <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -615,7 +619,7 @@ footer{background:var(--ink);padding:44px 40px 28px}
       <div class="limited-note-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       </div>
-      <p class="limited-note-text">Designed for specific moments throughout the year, these sessions offer a streamlined way to experience Posterchild quality. <strong>Dates are released seasonally and fill quickly.</strong> Once a date is gone, it's gone.</p>
+      <p class="limited-note-text">Designed for specific moments throughout the year, these sessions offer a streamlined way to experience Posterchild quality at limited-time campaign pricing — <strong>these promotional rates are separate from our standard listed pricing</strong> above and are not available year-round. Dates are released seasonally and fill quickly. Once a date is gone, it's gone.</p>
     </div>
   </div>
 </div>
@@ -703,31 +707,79 @@ footer{background:var(--ink);padding:44px 40px 28px}
 <div class="turnaround">
   <div class="turnaround-inner">
     <div class="turnaround-num">72<span>hrs</span></div>
-    <div class="turnaround-label">Guaranteed Photo Delivery</div>
-    <p class="turnaround-sub">Every session is edited and delivered within 72 hours of your shoot date. Fast, professional, and always gallery-ready.</p>
+    <div class="turnaround-label">Standard Photo Delivery</div>
+    <p class="turnaround-sub">Standard photography sessions are edited and delivered within 72 hours of your shoot date. Video, corporate, and large productions follow project-specific timelines — rush delivery is available where scheduling permits.</p>
   </div>
 </div>
 
-<!-- BOOKING POLICY -->
+<!-- BOOKING & PRODUCTION DETAILS -->
 <div class="policy-strip">
   <div class="policy-inner">
-    <h2 class="policy-title reveal">Booking <span>Policy.</span></h2>
-    <div class="policy-cards">
-      <div class="pol-card reveal">
-        <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="pol-title">25% Deposit Required</div>
-        <p class="pol-text">A <strong>25% deposit is required</strong> to secure your booking. Your date is not held until the deposit is received.</p>
-      </div>
-      <div class="pol-card reveal rd1">
-        <div class="pol-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-        <div class="pol-title">Balance Due at Shoot</div>
-        <p class="pol-text">The <strong>remaining balance is due before or on your shoot day.</strong> All major payment methods accepted.</p>
-      </div>
-      <div class="pol-card reveal rd2">
-        <div class="pol-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="pol-title">Limited Availability</div>
-        <p class="pol-text">Dates fill quickly. <strong>Once your deposit is submitted,</strong> your spot is locked in. Reach out early.</p>
-      </div>
+    <h2 class="policy-title reveal">Booking & Production <span>Details.</span></h2>
+    <div class="bpd-acc reveal">
+      <details class="bpd-item">
+        <summary>Booking Minimums</summary>
+        <div class="bpd-body">
+          <p>Standard portrait sessions begin at the listed session rate. Event coverage requires a 3-hour minimum. Video production requires a 3-hour minimum. Standalone creative direction requires a 2-hour minimum unless otherwise included in a production package.</p>
+        </div>
+      </details>
+      <details class="bpd-item" open>
+        <summary>Booking Retainer</summary>
+        <div class="bpd-body">
+          <p>A <strong>25% non-refundable retainer</strong> is required to reserve a production date. The remaining balance is due according to the payment schedule specified in the project agreement.</p>
+          <p>A date is not considered secured until the required retainer and agreement have been received.</p>
+        </div>
+      </details>
+      <details class="bpd-item">
+        <summary>Post-Production</summary>
+        <div class="bpd-body">
+          <p>Standard editing included with a package covers only the deliverables specifically listed in the client's proposal or project agreement. Additional photo retouching, video editing, alternate cuts, formatting, exports, or post-production outside the agreed scope may be billed separately.</p>
+        </div>
+      </details>
+      <details class="bpd-item">
+        <summary>Revisions</summary>
+        <div class="bpd-body">
+          <p>Projects include up to two standard revision rounds unless otherwise stated in the applicable proposal or agreement. Additional revisions begin at $100/hour with a one-hour minimum.</p>
+        </div>
+      </details>
+      <details class="bpd-item">
+        <summary>Rush Delivery</summary>
+        <div class="bpd-body">
+          <p>Standard turnaround varies according to project type and scope. When scheduling permits: under 72 hours is +25%, under 48 hours is +35%, and 24-hour / same-day delivery is +50% or more.</p>
+          <p>Rush service is subject to availability.</p>
+        </div>
+      </details>
+      <details class="bpd-item">
+        <summary>Raw Files & Source Materials</summary>
+        <div class="bpd-body">
+          <p>RAW photographs, unedited video footage, project files, and other source materials are not included with standard packages unless explicitly stated. Raw/source-material delivery may be licensed or provided for an additional fee beginning at 50% of the applicable project subtotal, depending on scope, storage availability, and usage requirements.</p>
+          <p>Copyright or intellectual-property ownership transfers require a separately negotiated written agreement and are not included with standard raw-file delivery.</p>
+        </div>
+      </details>
+      <details class="bpd-item">
+        <summary>Travel & Location Fees</summary>
+        <div class="bpd-body">
+          <p>Base rates apply to the designated local Atlanta service area. Extended travel, parking, permits, studio rentals, location fees, specialized equipment, additional crew, lodging, and other third-party production expenses may be billed separately when applicable.</p>
+        </div>
+      </details>
+      <details class="bpd-item">
+        <summary>Overtime</summary>
+        <div class="bpd-body">
+          <p>Time exceeding the contracted production or coverage period is subject to availability and may be billed at the applicable hourly or overtime rate.</p>
+        </div>
+      </details>
+      <details class="bpd-item">
+        <summary>Commercial Usage & Licensing</summary>
+        <div class="bpd-body">
+          <p>Corporate, advertising, product, campaign, promotional, and other commercial projects may require separate licensing or usage fees. Pricing may vary based on intended use, distribution, media, campaign duration, territory, audience/reach, and exclusivity. Commercial licensing may be quoted separately.</p>
+        </div>
+      </details>
+      <details class="bpd-item">
+        <summary>Custom Productions</summary>
+        <div class="bpd-body">
+          <p>Multi-location productions, campaigns, large events, commercial productions, advanced creative direction, luxury real estate productions, and projects requiring additional crew or specialized equipment are custom quoted.</p>
+        </div>
+      </details>
     </div>
   </div>
 </div>
@@ -769,7 +821,7 @@ footer{background:var(--ink);padding:44px 40px 28px}
       <div class="fpanel" id="step2">
         <div class="frow">
           <div class="fg"><label>Session Type</label>
-            <select id="type"><option value="">Select type</option><option>Wedding</option><option>Birthday</option><option>Prom</option><option>Graduation</option><option>Editorial / Creative</option><option>Brand / Commercial</option><option>Express Headshots</option><option>Power Session (Limited)</option><option>Seasonal Session</option><option>Other</option></select>
+            <select id="type"><option value="">Select type</option><option>Portraits & Milestones</option><option>Events</option><option>Corporate & Commercial</option><option>Creative Direction & Production</option><option>Real Estate Media</option><option>Other</option></select>
           </div>
           <div class="fg"><label>Preferred Date</label><input type="date" id="pdate"></div>
         </div>
@@ -801,12 +853,12 @@ footer{background:var(--ink);padding:44px 40px 28px}
         <div class="fg">
           <label>Select Your Investment Level <span style="color:var(--red);font-size:10px">(Required)</span></label>
           <div class="budget-opts" id="budgetOpts">
-            <div class="bopt" onclick="pickBudget(this,'$350–$650')">$350–$650</div>
-            <div class="bopt" onclick="pickBudget(this,'$650–$1,200')">$650–$1,200</div>
-            <div class="bopt" onclick="pickBudget(this,'$1,200–$2,500')">$1,200–$2,500</div>
+            <div class="bopt" onclick="pickBudget(this,'$200–$500')">$200–$500</div>
+            <div class="bopt" onclick="pickBudget(this,'$500–$1,000')">$500–$1,000</div>
+            <div class="bopt" onclick="pickBudget(this,'$1,000–$2,500')">$1,000–$2,500</div>
             <div class="bopt" onclick="pickBudget(this,'$2,500–$5,000')">$2,500–$5,000</div>
             <div class="bopt" onclick="pickBudget(this,'$5,000+')">$5,000+</div>
-            <div class="bopt" onclick="pickBudget(this,'Not Sure Yet')">Not Sure Yet</div>
+            <div class="bopt" onclick="pickBudget(this,'Not Sure / Custom Quote')">Not Sure / Custom Quote</div>
           </div>
         </div>
         <!-- PRINTS UPSELL QUESTION -->
@@ -875,7 +927,7 @@ const cur=document.getElementById('cursor'),ring=document.getElementById('cursor
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
 (function ar(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar)})();
-document.querySelectorAll('a,button,.bopt,.price-card,.seasonal-card,.print-card,.power-card,.pr-opt').forEach(el=>{
+document.querySelectorAll('a,button,.bopt,.price-card,.seasonal-card,.print-card,.power-card,.pr-opt,.bpd-item summary').forEach(el=>{
   el.addEventListener('mouseenter',()=>{cur.classList.add('hov');ring.classList.add('hov')});
   el.addEventListener('mouseleave',()=>{cur.classList.remove('hov');ring.classList.remove('hov')});
 });
@@ -910,6 +962,23 @@ function preSelect(val){
   badge.style.display='block';
   setTimeout(()=>document.getElementById('booking-form').scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
+function selectService(type,budgetVal){
+  const typeSel=document.getElementById('type');
+  for(const o of typeSel.options){ if(o.value===type){ typeSel.value=type; break; } }
+  preSelect(budgetVal);
+}
+// Prefill from a Services CTA link like booking.html?service=Events#booking-form
+(function prefillFromQuery(){
+  const params=new URLSearchParams(window.location.search);
+  const service=params.get('service');
+  if(!service)return;
+  const typeSel=document.getElementById('type');
+  for(const o of typeSel.options){ if(o.value===service){ typeSel.value=service; break; } }
+  const badge=document.getElementById('preSelectBadge');
+  document.getElementById('preSelectLabel').textContent=service;
+  badge.style.display='block';
+  goStep(2);
+})();
 async function submitForm(){
   const fname=document.getElementById('fname').value.trim();
   const lname=document.getElementById('lname').value.trim();

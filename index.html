@@ -99,7 +99,7 @@ body{cursor:auto}
 .pi:nth-child(4) img{object-position:center center}
 .pi:nth-child(5) img{object-position:center 38%}
 .about-img-inner img{object-position:center center}
-.hero-stripe img{object-position:center center}
+.hv-tile-main img{object-position:center center}
 
   .hero-video-wrap {
   position: relative;
@@ -178,11 +178,18 @@ nav.scrolled{background:rgba(255,255,255,0.97);box-shadow:0 2px 24px rgba(21,101
 .hbs-1{width:700px;height:700px;right:-180px;top:-200px;background:radial-gradient(circle,rgba(21,101,255,0.08) 0%,transparent 70%)}
 .hbs-2{width:400px;height:400px;left:-100px;bottom:-100px;background:radial-gradient(circle,rgba(255,214,0,0.12) 0%,transparent 70%)}
 .hbs-3{width:300px;height:300px;right:30%;bottom:5%;background:radial-gradient(circle,rgba(232,0,30,0.07) 0%,transparent 70%)}
-.hero-stripe{position:absolute;top:0;right:0;bottom:0;width:48%;clip-path:polygon(10% 0,100% 0,100% 100%,0% 100%);overflow:hidden;background:var(--surface)}
-.hero-stripe img{width:100%;height:100%;object-fit:cover}
-.hero-stripe-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.hero-stripe-empty span{font-family:var(--font-display);font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:var(--silver-mid);text-align:center;line-height:2.2}
-.hero-stripe::after{content:'';position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(to right,var(--white),transparent)}
+.hero-visual{position:absolute;top:0;right:0;bottom:0;width:46%;pointer-events:none}
+.hv-tile{position:absolute;border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);box-shadow:0 24px 56px rgba(13,17,23,0.16)}
+.hv-tile img{width:100%;height:100%;object-fit:cover;display:block}
+.hv-tile-main{top:110px;left:96px;right:56px;bottom:190px;z-index:2;animation:fadeUp 0.9s ease both 0.3s}
+.hv-tile-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--surface) 0%,var(--surface-2) 100%)}
+.hv-tile-empty span{font-family:var(--font-display);font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:var(--silver-mid);text-align:center;line-height:2.2}
+.hv-tile-side{width:44%;aspect-ratio:3/4;left:-6%;bottom:64px;border:7px solid var(--white);transform:rotate(-4deg);z-index:3;animation:fadeUp 0.9s ease both 0.45s}
+.hv-chip{position:absolute;width:104px;height:104px;right:8px;bottom:96px;background:var(--yellow);border-radius:var(--radius);transform:rotate(9deg);z-index:1;animation:fadeUp 0.9s ease both 0.2s}
+.hv-ring{position:absolute;top:64px;right:24px;width:56px;height:56px;border:3px solid var(--blue);border-radius:50%;z-index:4;animation:fadeUp 0.9s ease both 0.55s}
+.hv-label{position:absolute;left:40px;bottom:24px;z-index:4;background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--radius-pill);padding:9px 18px;box-shadow:0 8px 24px rgba(13,17,23,0.1);animation:fadeUp 0.9s ease both 0.65s}
+.hv-label span{display:block;font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--red)}
+.hv-label strong{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--ink);letter-spacing:0.02em}
 .hero-content{position:relative;z-index:2;padding:140px 40px 80px 40px;max-width:680px}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-pale);color:var(--blue);border:1.5px solid rgba(21,101,255,0.2);padding:7px 16px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:28px;animation:fadeUp 0.8s ease both 0.1s}
 .hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 1.8s infinite}
@@ -240,30 +247,64 @@ section{padding:100px 40px}
 .services-bg{background:var(--ink)}
 .services-bg .section-tag-text{color:rgba(255,255,255,0.5)}
 .services-bg .section-h2{color:var(--white)}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;max-width:1200px}
-.svc-card{background:#1a2030;padding:48px 36px;position:relative;overflow:hidden;cursor:pointer;transition:background 0.35s}
-.svc-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
-.svc-card:nth-child(1)::before{background:var(--blue)}
-.svc-card:nth-child(2)::before{background:var(--yellow)}
-.svc-card:nth-child(3)::before{background:var(--red)}
-.svc-card:nth-child(1):hover{background:var(--blue)}
-.svc-card:nth-child(2):hover{background:var(--yellow)}
-.svc-card:nth-child(3):hover{background:var(--red)}
-.svc-card:nth-child(2):hover .svc-title,.svc-card:nth-child(2):hover .svc-desc,.svc-card:nth-child(2):hover .svc-num{color:var(--ink)!important}
-.svc-card:nth-child(2):hover .svc-li{color:rgba(0,0,0,0.7)!important;border-color:rgba(0,0,0,0.15)!important}
-.svc-card:nth-child(2):hover .svc-icon-box{border-color:rgba(0,0,0,0.3)}
-.svc-card:nth-child(2):hover .svc-icon-box svg{stroke:var(--ink)}
-.svc-num{font-family:var(--font-display);font-size:80px;font-weight:700;color:rgba(255,255,255,0.04);position:absolute;top:16px;right:20px;line-height:1;transition:color 0.3s}
-.svc-icon-box{width:52px;height:52px;border:1.5px solid rgba(255,255,255,0.15);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;margin-bottom:28px;transition:border-color 0.3s}
-.svc-icon-box svg{width:22px;height:22px;stroke:rgba(255,255,255,0.7);fill:none;stroke-width:1.5;transition:stroke 0.3s}
-.svc-title{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--white);margin-bottom:12px;transition:color 0.3s}
-.svc-desc{font-size:13px;line-height:1.8;color:rgba(255,255,255,0.5);transition:color 0.3s}
-.svc-list{margin-top:24px;list-style:none}
-.svc-li{font-family:var(--font-ui);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:10px;transition:color 0.3s,border-color 0.3s}
-.svc-li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.svc-card:nth-child(1) .svc-li::before{background:var(--blue-light)}
-.svc-card:nth-child(2) .svc-li::before{background:var(--yellow)}
-.svc-card:nth-child(3) .svc-li::before{background:var(--red-light)}
+
+.svc5-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-top:56px;max-width:1200px}
+.svc5-card{background:#1a2030;padding:40px 32px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.svc5-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.svc5-card:nth-child(1){grid-column:span 3}
+.svc5-card:nth-child(2){grid-column:span 3}
+.svc5-card:nth-child(3){grid-column:span 2}
+.svc5-card:nth-child(4){grid-column:span 2}
+.svc5-card:nth-child(5){grid-column:span 2}
+.svc5-card:nth-child(3n+1)::before{background:var(--blue)}
+.svc5-card:nth-child(3n+2)::before{background:var(--yellow)}
+.svc5-card:nth-child(3n)::before{background:var(--red)}
+.svc5-eyebrow{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:18px}
+.svc5-title{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--white);margin-bottom:16px;line-height:1.05}
+.svc5-badge{display:inline-block;font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);padding:4px 10px;border-radius:var(--radius-pill);margin-bottom:16px;align-self:flex-start}
+.svc5-price{margin-bottom:16px}
+.svc5-price-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,0.08)}
+.svc5-price-row:first-child{border-top:none}
+.svc5-price-label{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);flex:1;min-width:0}
+.svc5-price-amount{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--white);flex-shrink:0;white-space:nowrap}
+.svc5-desc{font-size:13px;line-height:1.75;color:rgba(255,255,255,0.55);margin-bottom:16px;flex:1}
+.svc5-deliv{list-style:none;margin-bottom:14px}
+.svc5-deliv li{font-family:var(--font-ui);font-size:11px;letter-spacing:0.06em;color:rgba(255,255,255,0.4);padding:4px 0;display:flex;align-items:center;gap:8px}
+.svc5-deliv li::before{content:'';width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.3);flex-shrink:0}
+.svc5-note{font-family:var(--font-ui);font-size:11px;line-height:1.6;color:rgba(255,255,255,0.35);font-style:italic;margin-bottom:20px}
+.svc5-cta{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--white);background:rgba(255,255,255,0.08);padding:12px 20px;border-radius:var(--radius-pill);transition:all 0.25s;align-self:flex-start}
+.svc5-card:nth-child(3n+1) .svc5-cta:hover{background:var(--blue)}
+.svc5-card:nth-child(3n+2) .svc5-cta:hover{background:var(--yellow);color:var(--ink)}
+.svc5-card:nth-child(3n) .svc5-cta:hover{background:var(--red)}
+.svc5-cta svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform 0.25s}
+.svc5-cta:hover svg{transform:translateX(3px)}
+
+/* Post-production */
+.postprod{max-width:1200px;margin:64px auto 0;padding-top:48px;border-top:1px solid rgba(255,255,255,0.08)}
+.postprod-label{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.postprod-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.08)}
+.postprod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pp-item{border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:22px 24px}
+.pp-name{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--white);margin-bottom:6px}
+.pp-price{font-family:var(--font-ui);font-size:13px;font-weight:700;color:var(--yellow);margin-bottom:8px}
+.pp-desc{font-family:var(--font-ui);font-size:12px;line-height:1.6;color:rgba(255,255,255,0.4)}
+.postprod-note{font-family:var(--font-ui);font-size:12px;line-height:1.7;color:rgba(255,255,255,0.35);margin-top:20px;max-width:720px}
+
+/* Booking & Production Details accordion */
+.bpd{max-width:1200px;margin:56px auto 0}
+.bpd-title{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--white);margin-bottom:20px}
+.bpd-acc{border-top:1px solid rgba(255,255,255,0.1)}
+.bpd-item{border-bottom:1px solid rgba(255,255,255,0.1)}
+.bpd-item summary{list-style:none;cursor:pointer;padding:18px 4px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--font-ui);font-size:13px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.8)}
+.bpd-item summary::-webkit-details-marker{display:none}
+.bpd-item summary::after{content:'+';font-family:var(--font-body);font-size:20px;font-weight:300;color:rgba(255,255,255,0.4);transition:transform 0.25s;flex-shrink:0}
+.bpd-item[open] summary::after{transform:rotate(45deg)}
+.bpd-item[open] summary{color:var(--white)}
+.bpd-body{padding:0 4px 22px;font-family:var(--font-ui);font-size:13px;line-height:1.8;color:rgba(255,255,255,0.5);max-width:760px}
+.bpd-body p{margin-bottom:10px}
+.bpd-body p:last-child{margin-bottom:0}
+
+.pricing-disclaimer{max-width:1200px;margin:40px auto 0;font-family:var(--font-ui);font-size:11px;line-height:1.7;color:rgba(255,255,255,0.3);padding-top:24px;border-top:1px solid rgba(255,255,255,0.06)}
 
 /* ── PORTFOLIO ── */
 .portfolio-bg{background:var(--off-white)}
@@ -337,32 +378,22 @@ section{padding:100px 40px}
 .t-author{font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink)}
 .t-role{font-size:12px;color:var(--ink-soft);margin-top:3px}
 
-/* ── BOOKING ── */
-.booking-bg{background:var(--white)}
-.booking-wrap{max-width:800px;margin:60px auto 0}
-.form-tabs{display:flex;background:var(--surface);border-radius:var(--radius-pill);padding:4px;margin-bottom:44px;gap:2px}
-.ftab{flex:1;padding:12px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-align:center;cursor:pointer;border-radius:var(--radius-pill);color:var(--ink-soft);transition:all 0.3s;background:transparent;border:none}
-.ftab.active{background:var(--blue);color:var(--white);box-shadow:0 4px 14px rgba(21,101,255,0.3)}
-.fpanel{display:none}.fpanel.active{display:block;animation:fadeUp 0.35s ease}
-.fg{margin-bottom:22px}
-.fg label{display:block;font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
-.fg input,.fg select,.fg textarea{width:100%;background:var(--surface);border:1.5px solid var(--border);padding:14px 18px;font-size:14px;color:var(--ink);font-family:var(--font-body);font-weight:400;transition:border-color 0.3s,box-shadow 0.3s;outline:none;border-radius:var(--radius);-webkit-appearance:none}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(21,101,255,0.12)}
-.fg textarea{resize:none;min-height:100px}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.budget-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.bopt{border:1.5px solid var(--border);background:var(--surface);padding:14px;text-align:center;cursor:pointer;transition:all 0.25s;font-family:var(--font-ui);font-size:12px;font-weight:700;color:var(--ink-soft);border-radius:var(--radius)}
-.bopt:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale)}
-.bopt.sel{background:var(--blue);color:var(--white);border-color:var(--blue);box-shadow:0 4px 14px rgba(21,101,255,0.25)}
-.fbtn{width:100%;background:var(--blue);color:var(--white);border:none;padding:18px;font-family:var(--font-ui);font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;border-radius:var(--radius-pill);margin-top:12px;box-shadow:0 6px 24px rgba(21,101,255,0.3);transition:all 0.3s}
-.fbtn:hover{background:#0f50e0;transform:translateY(-2px);box-shadow:0 10px 32px rgba(21,101,255,0.4)}
-.fnote{text-align:center;margin-top:14px;font-size:12px;color:var(--ink-soft);font-family:var(--font-ui)}
-.form-success{display:none;text-align:center;padding:60px 24px}
-.form-success.show{display:block;animation:fadeUp 0.5s ease}
-.fsucc-icon{width:72px;height:72px;background:var(--blue-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px}
-.fsucc-icon svg{width:32px;height:32px;stroke:var(--blue);fill:none;stroke-width:2}
-.fsucc-title{font-family:var(--font-display);font-size:40px;font-weight:700;color:var(--ink);margin-bottom:14px}
-.fsucc-sub{font-family:var(--font-ui);font-size:16px;color:var(--ink-soft);line-height:1.7}
+/* ── CLOSING CTA ── */
+.cta-close{background:var(--white);overflow:hidden}
+.cta-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.15fr 1fr;gap:72px;align-items:center}
+.cta-h2{font-family:var(--font-display);font-size:clamp(40px,6vw,76px);font-weight:700;line-height:0.98;letter-spacing:-0.01em;color:var(--ink);margin:20px 0 24px}
+.cta-h2 .accent-yellow{background:var(--yellow);color:var(--ink);padding:0 10px;display:inline-block;transform:skewX(-4deg)}
+.cta-sub{font-family:var(--font-ui);font-size:17px;font-weight:300;color:var(--ink-soft);line-height:1.7;max-width:440px;margin-bottom:36px}
+.cta-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:36px}
+.cta-tags{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft)}
+.cta-tag-dot{width:4px;height:4px;border-radius:50%;background:var(--silver-mid);flex-shrink:0}
+.cta-mark{position:relative;height:420px}
+.cta-mark-block{position:absolute;inset:0 36px 56px 0;background:var(--ink);border-radius:var(--radius-lg)}
+.cta-mark-arrow{position:absolute;inset:0 36px 56px 0;display:flex;align-items:center;justify-content:center}
+.cta-mark-arrow svg{width:72px;height:72px;stroke:var(--white);fill:none;stroke-width:1.5}
+.cta-mark-yellow{position:absolute;width:120px;height:120px;background:var(--yellow);border-radius:var(--radius);right:0;top:8px;transform:rotate(8deg);box-shadow:0 16px 40px rgba(255,214,0,0.3)}
+.cta-mark-red{position:absolute;width:84px;height:84px;background:var(--red);border-radius:50%;left:8px;bottom:8px;box-shadow:0 16px 40px rgba(232,0,30,0.25)}
+.cta-mark-ring{position:absolute;width:64px;height:64px;border:4px solid var(--blue);border-radius:50%;right:64px;bottom:24px}
 
 /* ── FOOTER ── */
 footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
@@ -427,12 +458,18 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
 @media(max-width:960px){
   nav{padding:0 20px}.nav-links{display:none}.nav-ham{display:flex}
   section{padding:72px 20px}
-  .hero-content{padding:120px 20px 72px}
-  .hero-stripe{width:100%;clip-path:none;opacity:0.15}
+  .hero{min-height:auto;flex-direction:column;align-items:stretch}
+  .hero-content{padding:120px 20px 0;order:1;max-width:none}
+  .hero-visual{position:relative;width:auto;order:2;height:260px;margin:40px 20px 56px;pointer-events:none}
+  .hv-tile-side,.hv-chip,.hv-ring,.hv-label{display:none}
+  .hv-tile-main{top:0;left:0;right:0;bottom:0}
   .hero-h1{font-size:clamp(44px,10vw,64px)}
   .hero-scroll,.hero-avail{display:none}
   .about-wrap{grid-template-columns:1fr;gap:40px}
-  .services-grid{grid-template-columns:1fr;max-width:100%}
+  .svc5-grid{grid-template-columns:1fr;max-width:100%}
+  .svc5-card:nth-child(n){grid-column:span 1}
+  .postprod-grid{grid-template-columns:1fr}
+  .bpd-item summary{font-size:12px}
   .pgrid{grid-template-columns:1fr 1fr}
   .pi:nth-child(1){grid-column:span 2;min-height:280px}
   .pi:nth-child(n+2){grid-column:span 1}
@@ -440,8 +477,12 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   .proc-right{position:static}
   .tgrid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
-  .frow{grid-template-columns:1fr}
-  .budget-opts{grid-template-columns:1fr 1fr}
+  .cta-grid{grid-template-columns:1fr;gap:36px}
+  .cta-mark{height:220px}
+  .cta-mark-block,.cta-mark-arrow{inset:0 20px 32px 0}
+  .cta-mark-yellow{width:88px;height:88px}
+  .cta-mark-red{width:60px;height:60px}
+  .cta-mark-ring{width:48px;height:48px;right:40px}
   .sticky-book{bottom:18px;right:18px;padding:12px 20px;font-size:11px}
   .edit-fab{bottom:18px;left:14px;padding:10px 16px;font-size:10px}
   .edit-panel{left:12px;right:12px;width:auto;bottom:66px}
@@ -450,7 +491,6 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   .footer-grid{grid-template-columns:1fr}
   .pgrid{grid-template-columns:1fr}
   .pi:nth-child(n){grid-column:span 1}
-  .budget-opts{grid-template-columns:1fr}
   .tgrid{grid-template-columns:1fr}
 }
 </style>
@@ -497,6 +537,7 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
     <div class="hbs-circle hbs-2"></div>
     <div class="hbs-circle hbs-3"></div>
   </div>
+<<<<<<< HEAD
 <div class="hero-stripe hero-video-wrap">
 
   <video
@@ -524,6 +565,17 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   <div class="hero-video-overlay"></div>
 
 </div>
+=======
+  <div class="hero-visual">
+    <div class="hv-chip"></div>
+    <div class="hv-tile hv-tile-main" id="heroZone" data-dropslot="hero">
+      <div class="hv-tile-empty" id="heroHint"><span>Your hero image<br>goes here</span></div>
+    </div>
+    <div class="hv-tile hv-tile-side"><img src="images/editorial-beauty.jpg" alt="Editorial portrait by Posterchild Media" loading="lazy"></div>
+    <div class="hv-ring"></div>
+    <div class="hv-label"><span>Directed By</span><strong>Posterchild Media</strong></div>
+  </div>
+>>>>>>> aafcb3d (Update Posterchild pricing, policies, and booking experience)
   <div class="hero-content">
     <div class="hero-badge"><div class="hero-badge-dot"></div><span id="heroBadge"></span></div>
     <h1 class="hero-h1">
@@ -603,33 +655,166 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
     <div class="reveal">
       <div class="section-tag">
         <div class="section-tag-bar" style="background:rgba(255,255,255,0.3)"></div>
-        <div class="section-tag-text" style="color:rgba(255,255,255,0.45)">What We Offer</div>
+        <div class="section-tag-text" style="color:rgba(255,255,255,0.45)">Services & Investment</div>
       </div>
-      <h2 class="section-h2" style="color:var(--white)">Premium experiences,<br>not just services.</h2>
+      <h2 class="section-h2" style="color:var(--white)">Premium production,<br>not just photography.</h2>
     </div>
-    <div class="services-grid reveal">
-      <div class="svc-card">
-        <div class="svc-num">01</div>
-        <div class="svc-icon-box"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
-        <h3 class="svc-title">Creative Direction</h3>
-        <p class="svc-desc">Full vision development before your shoot ever starts. Concept, mood, movement — so every frame looks like a magazine spread.</p>
-        <ul class="svc-list"><li class="svc-li">Pre-shoot concept development</li><li class="svc-li">Posing & movement coaching</li><li class="svc-li">Wardrobe & styling guidance</li><li class="svc-li">Location scouting</li></ul>
+
+    <div class="svc5-grid reveal">
+      <div class="svc5-card">
+        <div class="svc5-eyebrow">01 · Portraits & Milestones</div>
+        <h3 class="svc5-title">Portraits &<br>Milestones</h3>
+        <div class="svc5-price"><div class="svc5-price-row"><span class="svc5-price-label">Starting at</span><span class="svc5-price-amount">$200</span></div></div>
+        <p class="svc5-desc">Editorial portraits, graduations, birthdays, personal branding, lifestyle sessions, and milestone photography with a directed creative approach.</p>
+        <p class="svc5-note">Promotional / mini sessions are occasionally offered separately at limited-time campaign pricing.</p>
+        <a href="booking.html?service=Portraits%20%26%20Milestones#booking-form" class="svc5-cta">Book a Session <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="svc-card">
-        <div class="svc-num">02</div>
-        <div class="svc-icon-box"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-        <h3 class="svc-title">Photography</h3>
-        <p class="svc-desc">Cinematic, high-fashion photography that captures not just how you look — but how you feel. Meticulously lit, gallery-ready.</p>
-        <ul class="svc-list"><li class="svc-li">Editorial portrait sessions</li><li class="svc-li">Weddings & celebrations</li><li class="svc-li">Prom & graduation</li><li class="svc-li">Brand & commercial</li></ul>
+
+      <div class="svc5-card">
+        <div class="svc5-eyebrow">02 · Events</div>
+        <h3 class="svc5-title">Events</h3>
+        <div class="svc5-badge">3-Hour Minimum</div>
+        <div class="svc5-price"><div class="svc5-price-row"><span class="svc5-price-label">Starting at</span><span class="svc5-price-amount">$125/hr</span></div></div>
+        <p class="svc5-desc">Photography and creative event coverage for birthdays, graduations, celebrations, launches, networking events, brand activations, and other special occasions.</p>
+        <a href="booking.html?service=Events#booking-form" class="svc5-cta">Plan Your Event <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="svc-card">
-        <div class="svc-num">03</div>
-        <div class="svc-icon-box"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-        <h3 class="svc-title">Videography</h3>
-        <p class="svc-desc">Short-form cinematic edits that feel like film trailers. Built for social media, built for impact, built to be rewatched.</p>
-        <ul class="svc-list"><li class="svc-li">Event highlight films</li><li class="svc-li">Cinematic wedding films</li><li class="svc-li">Brand & content creation</li><li class="svc-li">Social reels & edits</li></ul>
+
+      <div class="svc5-card">
+        <div class="svc5-eyebrow">03 · Corporate & Commercial</div>
+        <h3 class="svc5-title">Corporate &<br>Commercial</h3>
+        <div class="svc5-price">
+          <div class="svc5-price-row"><span class="svc5-price-label">Half Day · Up to 4hrs</span><span class="svc5-price-amount">$750+</span></div>
+          <div class="svc5-price-row"><span class="svc5-price-label">Full Day · Up to 8hrs</span><span class="svc5-price-amount">$1,250+</span></div>
+        </div>
+        <p class="svc5-desc">Visual production for businesses, brands, entrepreneurs, organizations, campaigns, corporate events, branded content, promotional media, and marketing initiatives.</p>
+        <p class="svc5-note">Commercial usage and licensing may be quoted separately depending on project scope and intended use.</p>
+        <a href="booking.html?service=Corporate%20%26%20Commercial#booking-form" class="svc5-cta">Request a Quote <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="svc5-card">
+        <div class="svc5-eyebrow">04 · Creative Direction & Production</div>
+        <h3 class="svc5-title">Creative Direction<br>& Production</h3>
+        <div class="svc5-price">
+          <div class="svc5-price-row"><span class="svc5-price-label">Starting at</span><span class="svc5-price-amount">$100/hr</span></div>
+          <div class="svc5-price-row"><span class="svc5-price-label">Half Day · Up to 4hrs</span><span class="svc5-price-amount">$500+</span></div>
+          <div class="svc5-price-row"><span class="svc5-price-label">Full Day · Up to 8hrs</span><span class="svc5-price-amount">$900+</span></div>
+          <div class="svc5-price-row"><span class="svc5-price-label">Team / Campaign Productions</span><span class="svc5-price-amount">Custom Quote</span></div>
+        </div>
+        <p class="svc5-desc">Concept development, visual strategy, styling direction, shot planning, talent direction, production oversight, and on-set creative leadership. 2-hour minimum. Team/campaign productions cover additional photographers, videographers, assistants, stylists, talent, multiple locations, or specialized equipment.</p>
+        <a href="booking.html?service=Creative%20Direction%20%26%20Production#booking-form" class="svc5-cta">Start a Project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="svc5-card">
+        <div class="svc5-eyebrow">05 · Real Estate Media</div>
+        <h3 class="svc5-title">Real Estate<br>Media</h3>
+        <div class="svc5-price">
+          <div class="svc5-price-row"><span class="svc5-price-label">Standard Property</span><span class="svc5-price-amount">$350+</span></div>
+          <div class="svc5-price-row"><span class="svc5-price-label">Luxury Property</span><span class="svc5-price-amount">$650+</span></div>
+        </div>
+        <p class="svc5-desc">Elevated real estate photography and visual production for agents, developers, property owners, builders, and luxury listings.</p>
+        <ul class="svc5-deliv">
+          <li>Listing photography</li><li>Cinematic walkthroughs</li><li>Vertical social content</li>
+          <li>Agent branding</li><li>Creative direction</li><li>Drone services where available and legally permitted</li>
+        </ul>
+        <p class="svc5-note">Final pricing depends on property size, production scope, requested deliverables, travel, and additional production requirements — not every deliverable above is included at the base price.</p>
+        <a href="booking.html?service=Real%20Estate%20Media#booking-form" class="svc5-cta">Book Property Media <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
+
+    <!-- POST-PRODUCTION -->
+    <div class="postprod reveal">
+      <div class="postprod-label">Post-Production</div>
+      <div class="postprod-grid">
+        <div class="pp-item">
+          <div class="pp-name">Photo Retouching</div>
+          <div class="pp-price">Starting at $40/image</div>
+          <p class="pp-desc">Custom gallery pricing available.</p>
+        </div>
+        <div class="pp-item">
+          <div class="pp-name">Video Editing</div>
+          <div class="pp-price">Starting at $100/hour</div>
+          <p class="pp-desc">Flat project pricing available based on scope.</p>
+        </div>
+        <div class="pp-item">
+          <div class="pp-name">Additional Revisions</div>
+          <div class="pp-price">$100/hour</div>
+          <p class="pp-desc">One-hour minimum after included revisions are exhausted.</p>
+        </div>
+      </div>
+      <p class="postprod-note">Editing included with a package applies only to the deliverables specifically stated in the client's proposal or project agreement.</p>
+    </div>
+
+    <!-- BOOKING & PRODUCTION DETAILS -->
+    <div class="bpd reveal">
+      <h3 class="bpd-title">Booking & Production Details</h3>
+      <div class="bpd-acc">
+        <details class="bpd-item">
+          <summary>Booking Minimums</summary>
+          <div class="bpd-body">
+            <p>Standard portrait sessions begin at the listed session rate. Event coverage requires a 3-hour minimum. Video production requires a 3-hour minimum. Standalone creative direction requires a 2-hour minimum unless otherwise included in a production package.</p>
+          </div>
+        </details>
+        <details class="bpd-item">
+          <summary>Booking Retainer</summary>
+          <div class="bpd-body">
+            <p>A 25% non-refundable retainer is required to reserve a production date. The remaining balance is due according to the payment schedule specified in the project agreement.</p>
+            <p>A date is not considered secured until the required retainer and agreement have been received.</p>
+          </div>
+        </details>
+        <details class="bpd-item">
+          <summary>Post-Production</summary>
+          <div class="bpd-body">
+            <p>Standard editing included with a package covers only the deliverables specifically listed in the client's proposal or project agreement. Additional photo retouching, video editing, alternate cuts, formatting, exports, or post-production outside the agreed scope may be billed separately.</p>
+          </div>
+        </details>
+        <details class="bpd-item">
+          <summary>Revisions</summary>
+          <div class="bpd-body">
+            <p>Projects include up to two standard revision rounds unless otherwise stated in the applicable proposal or agreement. Additional revisions begin at $100/hour with a one-hour minimum.</p>
+          </div>
+        </details>
+        <details class="bpd-item">
+          <summary>Rush Delivery</summary>
+          <div class="bpd-body">
+            <p>Standard turnaround varies according to project type and scope. When scheduling permits: under 72 hours is +25%, under 48 hours is +35%, and 24-hour / same-day delivery is +50% or more.</p>
+            <p>Rush service is subject to availability.</p>
+          </div>
+        </details>
+        <details class="bpd-item">
+          <summary>Raw Files & Source Materials</summary>
+          <div class="bpd-body">
+            <p>RAW photographs, unedited video footage, project files, and other source materials are not included with standard packages unless explicitly stated. Raw/source-material delivery may be licensed or provided for an additional fee beginning at 50% of the applicable project subtotal, depending on scope, storage availability, and usage requirements.</p>
+            <p>Copyright or intellectual-property ownership transfers require a separately negotiated written agreement and are not included with standard raw-file delivery.</p>
+          </div>
+        </details>
+        <details class="bpd-item">
+          <summary>Travel & Location Fees</summary>
+          <div class="bpd-body">
+            <p>Base rates apply to the designated local Atlanta service area. Extended travel, parking, permits, studio rentals, location fees, specialized equipment, additional crew, lodging, and other third-party production expenses may be billed separately when applicable.</p>
+          </div>
+        </details>
+        <details class="bpd-item">
+          <summary>Overtime</summary>
+          <div class="bpd-body">
+            <p>Time exceeding the contracted production or coverage period is subject to availability and may be billed at the applicable hourly or overtime rate.</p>
+          </div>
+        </details>
+        <details class="bpd-item">
+          <summary>Commercial Usage & Licensing</summary>
+          <div class="bpd-body">
+            <p>Corporate, advertising, product, campaign, promotional, and other commercial projects may require separate licensing or usage fees. Pricing may vary based on intended use, distribution, media, campaign duration, territory, audience/reach, and exclusivity. Commercial licensing may be quoted separately.</p>
+          </div>
+        </details>
+        <details class="bpd-item">
+          <summary>Custom Productions</summary>
+          <div class="bpd-body">
+            <p>Multi-location productions, campaigns, large events, commercial productions, advanced creative direction, luxury real estate productions, and projects requiring additional crew or specialized equipment are custom quoted.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <p class="pricing-disclaimer">All listed rates are starting prices and are provided as general booking guidance. Final pricing is determined by project scope, coverage time, deliverables, location, production requirements, usage/licensing, crew, equipment, and post-production needs. A custom quote may be required before booking.</p>
   </div>
 </section>
 
@@ -695,84 +880,30 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   <div class="tgrid reveal" id="testimonialGrid"></div>
 </section>
 
-<!-- BOOKING -->
-<section id="booking" class="booking-bg">
-  <div style="max-width:1200px;margin:0 auto">
-    <div class="reveal">
+<!-- CLOSING CTA -->
+<section id="booking" class="cta-close">
+  <div class="cta-grid reveal">
+    <div>
       <div class="section-tag">
         <div class="section-tag-bar" style="background:var(--red)"></div>
-        <div class="section-tag-text" style="color:var(--red)">Inquire & Book</div>
+        <div class="section-tag-text" style="color:var(--red)">Ready When You Are</div>
       </div>
-      <h2 class="section-h2">Let's build<br>your vision.</h2>
-      <p style="font-family:var(--font-ui);font-size:14px;color:var(--ink-soft);margin-top:8px">Limited spots available — serious inquiries only.</p>
+      <h2 class="cta-h2">Let's Create<br><span class="accent-yellow">Something</span><br>Worth Seeing.</h2>
+      <p class="cta-sub">Tell us what you're planning and we'll build the right production around it.</p>
+      <div class="cta-actions">
+        <a href="booking.html" class="btn-blue">Start Your Project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="booking.html#packages" class="btn-outline">View Pricing</a>
+      </div>
+      <div class="cta-tags">
+        <span>Portraits</span><div class="cta-tag-dot"></div><span>Events</span><div class="cta-tag-dot"></div><span>Commercial</span><div class="cta-tag-dot"></div><span>Creative Direction</span><div class="cta-tag-dot"></div><span>Real Estate</span>
+      </div>
     </div>
-    <div class="booking-wrap">
-      <div id="formWrap">
-        <div class="form-tabs">
-          <button class="ftab active" onclick="goStep(1)">01 · Your Info</button>
-          <button class="ftab" onclick="goStep(2)">02 · Shoot Details</button>
-          <button class="ftab" onclick="goStep(3)">03 · Vision & Budget</button>
-        </div>
-        <div class="fpanel active" id="step1">
-          <div class="frow">
-            <div class="fg"><label>First Name</label><input type="text" id="fname" placeholder="Your first name"></div>
-            <div class="fg"><label>Last Name</label><input type="text" id="lname" placeholder="Your last name"></div>
-          </div>
-          <div class="frow">
-            <div class="fg"><label>Email</label><input type="email" id="email" placeholder="your@email.com"></div>
-            <div class="fg"><label>Phone</label><input type="tel" id="phone" placeholder="+1 (000) 000-0000"></div>
-          </div>
-          <div class="fg"><label>How did you hear about us?</label>
-            <select id="source"><option value="">Select one</option><option>Instagram</option><option>Referral</option><option>Google</option><option>TikTok</option><option>Other</option></select>
-          </div>
-          <button class="fbtn" onclick="goStep(2)">Continue — Shoot Details →</button>
-        </div>
-        <div class="fpanel" id="step2">
-          <div class="frow">
-            <div class="fg"><label>Session Type</label>
-              <select id="type"><option value="">Select type</option><option>Wedding</option><option>Birthday</option><option>Prom</option><option>Graduation</option><option>Editorial</option><option>Brand / Commercial</option><option>Other</option></select>
-            </div>
-            <div class="fg"><label>Preferred Date</label><input type="date" id="pdate"></div>
-          </div>
-          <div class="frow">
-            <div class="fg"><label>Location / City</label><input type="text" id="plocation" placeholder="City or venue"></div>
-            <div class="fg"><label>Number of People</label>
-              <select id="people"><option value="">Select</option><option>Just me</option><option>2–4</option><option>5–10</option><option>10+</option></select>
-            </div>
-          </div>
-          <div class="fg"><label>Videography needed?</label>
-            <select id="video"><option value="">Select</option><option>Photography only</option><option>Videography only</option><option>Both — Photo + Video</option></select>
-          </div>
-          <button class="fbtn" onclick="goStep(3)">Continue — Vision & Budget →</button>
-        </div>
-        <div class="fpanel" id="step3">
-          <div class="fg"><label>Describe your vision</label><textarea id="vision" placeholder="Tell us the mood, energy, and story you want to tell..."></textarea></div>
-          <div class="fg"><label>References or inspiration?</label><textarea id="inspo" placeholder="Instagram accounts, Pinterest boards, aesthetic vibes..." style="min-height:80px"></textarea></div>
-          <div class="fg">
-            <label>Investment Range <span style="color:var(--red);font-size:10px">(Required)</span></label>
-            <div class="budget-opts">
-              <div class="bopt" onclick="pickBudget(this,'$300–$600')">$300–$600</div>
-              <div class="bopt" onclick="pickBudget(this,'$600–$1,200')">$600–$1,200</div>
-              <div class="bopt" onclick="pickBudget(this,'$1,200–$2,500')">$1,200–$2,500</div>
-              <div class="bopt" onclick="pickBudget(this,'$2,500–$5,000')">$2,500–$5,000</div>
-              <div class="bopt" onclick="pickBudget(this,'$5,000+')">$5,000+</div>
-              <div class="bopt" onclick="pickBudget(this,'Let\'s Discuss')">Let's Discuss</div>
-            </div>
-          </div>
-          <div class="fg"><label>What experience are you looking for?</label><textarea id="expField" placeholder="Intimate and personal? Bold and editorial? Romantic and cinematic?" style="min-height:80px"></textarea></div>
-          <button class="fbtn" onclick="submitForm()">Submit Inquiry — Let's Create →</button>
-          <p class="fnote">We respond within 24 hours. Serious inquiries only.</p>
-        </div>
-      </div>
-      <div class="form-success" id="formSuccess">
-        <div class="fsucc-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <h3 class="fsucc-title">Inquiry Received.</h3>
-        <p class="fsucc-sub">Your shoot request has been received.<br>Let's bring your vision to life.<br><br><strong style="font-weight:700;color:var(--ink)">We'll be in touch within 24 hours.</strong></p>
-        <div style="margin-top:44px;display:flex;flex-direction:column;align-items:center;gap:10px">
-          <span style="font-family:var(--font-ui);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft)">While you wait, follow along</span>
-          <a id="igSuccessLink" href="#" target="_blank" style="color:var(--blue);font-family:var(--font-ui);font-size:14px;font-weight:700;text-decoration:none"></a>
-        </div>
-      </div>
+    <div class="cta-mark">
+      <div class="cta-mark-block"></div>
+      <div class="cta-mark-yellow"></div>
+      <div class="cta-mark-red"></div>
+      <div class="cta-mark-ring"></div>
+      <div class="cta-mark-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
   </div>
 </section>
@@ -855,8 +986,6 @@ document.getElementById('footerEmailLink').textContent = C.email;
 document.getElementById('footerIGLink').href         = igUrl;
 document.getElementById('footerIGLink').textContent  = '@' + C.instagram;
 document.getElementById('footerIG').href             = igUrl;
-document.getElementById('igSuccessLink').href        = igUrl;
-document.getElementById('igSuccessLink').textContent = '@' + C.instagram + ' →';
 
 // Stats
 const sg = document.getElementById('statsGrid');
@@ -947,7 +1076,7 @@ const cur = document.getElementById('cursor'), ring = document.getElementById('c
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
 (function ar(){ rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(ar); })();
-document.querySelectorAll('a,button,.bopt,.pi,.svc-card').forEach(el => {
+document.querySelectorAll('a,button,.pi,.svc5-card,.bpd-item summary').forEach(el => {
   el.addEventListener('mouseenter', () => { cur.classList.add('hov'); ring.classList.add('hov'); });
   el.addEventListener('mouseleave', () => { cur.classList.remove('hov'); ring.classList.remove('hov'); });
 });
@@ -959,27 +1088,6 @@ function toggleMob() { document.getElementById('mobMenu').classList.toggle('open
 // ── SCROLL REVEAL ────────────────────────────────────────────
 const ro = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); ro.unobserve(e.target); } }), {threshold:0.1});
 document.querySelectorAll('.reveal').forEach(r => ro.observe(r));
-
-// ── FORM ─────────────────────────────────────────────────────
-let budget = '';
-function goStep(n) {
-  document.querySelectorAll('.fpanel').forEach((p,i) => p.classList.toggle('active', i===n-1));
-  document.querySelectorAll('.ftab').forEach((t,i) => t.classList.toggle('active', i===n-1));
-  document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
-}
-function pickBudget(el, val) {
-  document.querySelectorAll('.bopt').forEach(b => b.classList.remove('sel'));
-  el.classList.add('sel'); budget = val;
-}
-function submitForm() {
-  if (!document.getElementById('fname').value.trim()) { alert('Please enter your name.'); return; }
-  if (!document.getElementById('email').value.trim()) { alert('Please enter your email.'); return; }
-  if (!document.getElementById('type').value) { alert('Please select a session type.'); return; }
-  if (!budget) { alert('Please select your investment range.'); return; }
-  document.getElementById('formWrap').style.display = 'none';
-  document.getElementById('formSuccess').classList.add('show');
-  document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
-}
 </script>
 </body>
 </html>
