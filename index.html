@@ -99,7 +99,7 @@ body{cursor:auto}
 .pi:nth-child(4) img{object-position:center center}
 .pi:nth-child(5) img{object-position:center 38%}
 .about-img-inner img{object-position:center center}
-.hv-tile-main img{object-position:center center}
+.hv-tile-main img,.hv-tile-main video{object-position:center center}
 
 /* ── CURSOR ── */
 .cursor{position:fixed;width:10px;height:10px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform 0.1s,background 0.2s}
@@ -115,6 +115,7 @@ nav.scrolled{background:rgba(255,255,255,0.97);box-shadow:0 2px 24px rgba(21,101
 .nav-logo{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:6px}
 .nav-logo-dot{width:10px;height:10px;border-radius:50%;background:var(--blue);flex-shrink:0;box-shadow:0 0 0 3px var(--blue-pale)}
 .nav-logo span.r{color:var(--red)}
+.nav-mascot{height:48px;width:auto;object-fit:contain;flex-shrink:0}
 .nav-links{display:flex;gap:4px;align-items:center}
 .nav-links a{color:var(--ink-soft);text-decoration:none;font-family:var(--font-ui);font-size:13px;font-weight:500;padding:8px 16px;border-radius:var(--radius-pill);transition:all 0.2s;letter-spacing:0.02em}
 .nav-links a:hover{background:var(--surface);color:var(--ink)}
@@ -126,28 +127,28 @@ nav.scrolled{background:rgba(255,255,255,0.97);box-shadow:0 2px 24px rgba(21,101
 /* ── STICKY BOOK ── */
 .sticky-book{position:fixed;bottom:28px;right:28px;z-index:999;background:var(--blue);color:var(--white);padding:14px 24px;font-family:var(--font-ui);font-size:12px;letter-spacing:0.06em;font-weight:700;text-decoration:none;border-radius:var(--radius-pill);display:flex;align-items:center;gap:8px;box-shadow:0 6px 28px rgba(21,101,255,0.35);transition:all 0.3s}
 .sticky-book:hover{background:#0f50e0;transform:translateY(-3px);box-shadow:0 10px 36px rgba(21,101,255,0.45)}
+.sticky-book.sb-hide{opacity:0;transform:translateY(16px);pointer-events:none}
 .sticky-book-dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);flex-shrink:0;animation:pulse 1.8s infinite}
 
 /* ── HERO ── */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--white)}
+.hero{position:relative;min-height:clamp(600px,75vh,820px);display:flex;align-items:center;overflow:hidden;background:var(--blue-pale);padding:0}
 .hero-bg-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .hbs-circle{position:absolute;border-radius:50%}
 .hbs-1{width:700px;height:700px;right:-180px;top:-200px;background:radial-gradient(circle,rgba(21,101,255,0.08) 0%,transparent 70%)}
 .hbs-2{width:400px;height:400px;left:-100px;bottom:-100px;background:radial-gradient(circle,rgba(255,214,0,0.12) 0%,transparent 70%)}
 .hbs-3{width:300px;height:300px;right:30%;bottom:5%;background:radial-gradient(circle,rgba(232,0,30,0.07) 0%,transparent 70%)}
-.hero-visual{position:absolute;top:0;right:0;bottom:0;width:46%;pointer-events:none}
-.hv-tile{position:absolute;border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);box-shadow:0 24px 56px rgba(13,17,23,0.16)}
-.hv-tile img{width:100%;height:100%;object-fit:cover;display:block}
-.hv-tile-main{top:110px;left:96px;right:56px;bottom:190px;z-index:2;animation:fadeUp 0.9s ease both 0.3s}
+.hero-halftone{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(21,101,255,0.16) 1.5px,transparent 1.5px);background-size:20px 20px;-webkit-mask-image:radial-gradient(ellipse 55% 65% at 82% 45%,#000 40%,transparent 78%);mask-image:radial-gradient(ellipse 55% 65% at 82% 45%,#000 40%,transparent 78%)}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1400px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:minmax(0,.95fr) minmax(400px,1.15fr);align-items:center;gap:clamp(16px,3vw,56px)}
+.hero-copy{min-width:0;position:relative;z-index:2;padding:140px 0 80px 0;max-width:680px}
+.hero-character-wrap{display:flex;align-items:flex-end;justify-content:flex-end;align-self:stretch;min-width:0}
+/* ── HERO VIDEO SHOWCASE ── */
+.hero-video-showcase{padding:0 40px 100px;background:var(--white)}
+.hv-tile{border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);box-shadow:0 24px 56px rgba(13,17,23,0.16)}
+.hv-tile img,.hv-tile video{width:100%;height:100%;object-fit:cover;display:block}
+.hv-hero-video{object-fit:contain;background:var(--surface)}
+.hv-tile-main{position:relative;max-width:960px;margin:0 auto;aspect-ratio:1078/862;animation:fadeUp 0.9s ease both 0.1s}
 .hv-tile-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--surface) 0%,var(--surface-2) 100%)}
 .hv-tile-empty span{font-family:var(--font-display);font-size:13px;letter-spacing:0.25em;text-transform:uppercase;color:var(--silver-mid);text-align:center;line-height:2.2}
-.hv-tile-side{width:44%;aspect-ratio:3/4;left:-6%;bottom:64px;border:7px solid var(--white);transform:rotate(-4deg);z-index:3;animation:fadeUp 0.9s ease both 0.45s}
-.hv-chip{position:absolute;width:104px;height:104px;right:8px;bottom:96px;background:var(--yellow);border-radius:var(--radius);transform:rotate(9deg);z-index:1;animation:fadeUp 0.9s ease both 0.2s}
-.hv-ring{position:absolute;top:64px;right:24px;width:56px;height:56px;border:3px solid var(--blue);border-radius:50%;z-index:4;animation:fadeUp 0.9s ease both 0.55s}
-.hv-label{position:absolute;left:40px;bottom:24px;z-index:4;background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--radius-pill);padding:9px 18px;box-shadow:0 8px 24px rgba(13,17,23,0.1);animation:fadeUp 0.9s ease both 0.65s}
-.hv-label span{display:block;font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--red)}
-.hv-label strong{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--ink);letter-spacing:0.02em}
-.hero-content{position:relative;z-index:2;padding:140px 40px 80px 40px;max-width:680px}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-pale);color:var(--blue);border:1.5px solid rgba(21,101,255,0.2);padding:7px 16px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:28px;animation:fadeUp 0.8s ease both 0.1s}
 .hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 1.8s infinite}
 .hero-h1{font-family:var(--font-display);font-size:clamp(52px,7vw,96px);font-weight:700;line-height:0.95;letter-spacing:-0.01em;color:var(--ink);margin-bottom:16px;animation:fadeUp 0.8s ease both 0.25s}
@@ -169,6 +170,22 @@ nav.scrolled{background:rgba(255,255,255,0.97);box-shadow:0 2px 24px rgba(21,101
 .hero-avail-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;margin-right:6px;animation:pulse 2s infinite}
 .hero-avail span{font-family:var(--font-ui);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft)}
 .hero-avail strong{display:block;font-family:var(--font-ui);font-size:11px;font-weight:700;color:var(--ink);margin-top:2px}
+.hero-character{display:block;height:clamp(560px,86vh,880px);width:auto;max-width:100%;object-fit:contain;align-self:flex-end;pointer-events:none;animation:fadeUp 0.9s ease both 0.35s}
+
+/* ── VALUE STRIP ── */
+.value-strip{position:relative;z-index:3;margin:-24px 40px 60px;background:var(--white);border-radius:var(--radius-lg);box-shadow:0 24px 56px rgba(13,17,23,0.12)}
+.vs-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:32px 28px}
+.vs-item{display:flex;align-items:flex-start;gap:14px}
+.vs-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vs-icon svg{width:22px;height:22px}
+.vs-icon-blue{background:var(--blue);color:var(--white)}
+.vs-icon-red{background:var(--red);color:var(--white)}
+.vs-icon-yellow{background:var(--yellow);color:var(--ink)}
+.vs-icon-lightblue{background:var(--blue-light);color:var(--white)}
+.vs-star{font-size:20px;line-height:1}
+.vs-text{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vs-text strong{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--ink)}
+.vs-text span{font-family:var(--font-ui);font-size:13px;color:var(--ink-soft);line-height:1.4}
 
 /* ── TICKER ── */
 .ticker{background:var(--blue);padding:14px 0;overflow:hidden}
@@ -414,14 +431,15 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
 
 @media(max-width:960px){
   nav{padding:0 20px}.nav-links{display:none}.nav-ham{display:flex}
+  .nav-mascot{height:36px}
   section{padding:72px 20px}
-  .hero{min-height:auto;flex-direction:column;align-items:stretch}
-  .hero-content{padding:120px 20px 0;order:1;max-width:none}
-  .hero-visual{position:relative;width:auto;order:2;height:260px;margin:40px 20px 56px;pointer-events:none}
-  .hv-tile-side,.hv-chip,.hv-ring,.hv-label{display:none}
-  .hv-tile-main{top:0;left:0;right:0;bottom:0}
-  .hero-h1{font-size:clamp(44px,10vw,64px)}
+  /* Hero stays side-by-side here — only tightened. Stacking happens at the narrower @media(max-width:720px) below. */
+  .hero-inner{grid-template-columns:minmax(0,.9fr) minmax(260px,1.1fr);gap:20px;padding-left:24px;padding-right:24px}
+  .hero-h1{font-size:clamp(40px,6.2vw,80px)}
+  .hero-character{height:clamp(380px,64vh,560px)}
   .hero-scroll,.hero-avail{display:none}
+  .value-strip{margin:-40px 20px 0;padding:24px 20px}
+  .vs-inner{grid-template-columns:repeat(2,1fr);gap:24px}
   .about-wrap{grid-template-columns:1fr;gap:40px}
   .svc5-grid{grid-template-columns:1fr;max-width:100%}
   .svc5-card:nth-child(n){grid-column:span 1}
@@ -444,6 +462,19 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   .edit-fab{bottom:18px;left:14px;padding:10px 16px;font-size:10px}
   .edit-panel{left:12px;right:12px;width:auto;bottom:66px}
 }
+/* Hero-only breakpoint: this is where headline+mascot actually stack. Deliberately narrower than the 960px nav breakpoint above. */
+@media(max-width:720px){
+  .hero{min-height:auto}
+  .hero-inner{grid-template-columns:1fr;gap:0;padding:0 20px}
+  .hero-copy{padding:120px 0 0;max-width:none}
+  .hero-character-wrap{justify-content:center;align-self:auto;margin:32px 0 0}
+  .hero-character{height:auto;width:82%;max-width:340px;margin:0 auto;align-self:auto}
+  .hero-video-showcase{padding:0 20px 56px}
+  .hv-tile-main{width:100%;max-width:none}
+  .hero-h1{font-size:clamp(44px,10vw,64px)}
+  .value-strip{margin:24px 20px 0;padding:24px 20px}
+  .vs-inner{grid-template-columns:1fr;gap:20px}
+}
 @media(max-width:600px){
   .footer-grid{grid-template-columns:1fr}
   .pgrid{grid-template-columns:1fr}
@@ -462,6 +493,7 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   <a href="index.html" class="nav-logo">
     <div class="nav-logo-dot"></div>
     Poster<span class="r">child</span>
+    <img class="nav-mascot" src="images/posterchild-character.png" alt="" aria-hidden="true">
   </a>
   <div class="nav-links">
     <a href="index.html#portfolio">Portfolio</a>
@@ -494,30 +526,27 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
     <div class="hbs-circle hbs-2"></div>
     <div class="hbs-circle hbs-3"></div>
   </div>
-  <div class="hero-visual">
-    <div class="hv-chip"></div>
-    <div class="hv-tile hv-tile-main" id="heroZone" data-dropslot="hero">
-      <div class="hv-tile-empty" id="heroHint"><span>Your hero image<br>goes here</span></div>
+  <div class="hero-halftone"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge"><div class="hero-badge-dot"></div><span id="heroBadge"></span></div>
+      <h1 class="hero-h1">
+        Not Just<br>
+        <span class="accent-yellow">Photos.</span><br>
+        <span class="accent-blue">A Directed</span><br>
+        <span class="accent-red">Experience.</span>
+      </h1>
+      <p class="hero-sub">Luxury photography & creative direction for moments that deserve more.</p>
+      <div class="hero-actions">
+        <a href="booking.html" class="btn-blue">
+          Book Your Shoot
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#portfolio" class="btn-outline">View Work</a>
+      </div>
     </div>
-    <div class="hv-tile hv-tile-side"><img src="images/editorial-beauty.jpg" alt="Editorial portrait by Posterchild Media" loading="lazy"></div>
-    <div class="hv-ring"></div>
-    <div class="hv-label"><span>Directed By</span><strong>Posterchild Media</strong></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-badge"><div class="hero-badge-dot"></div><span id="heroBadge"></span></div>
-    <h1 class="hero-h1">
-      Not Just<br>
-      <span class="accent-yellow">Photos.</span><br>
-      <span class="accent-blue">A Directed</span><br>
-      <span class="accent-red">Experience.</span>
-    </h1>
-    <p class="hero-sub">Luxury photography & creative direction for moments that deserve more.</p>
-    <div class="hero-actions">
-      <a href="booking.html" class="btn-blue">
-        Book Your Shoot
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#portfolio" class="btn-outline">View Work</a>
+    <div class="hero-character-wrap">
+      <img class="hero-character" src="images/posterchild-character.png" alt="Posterchild Media character mascot">
     </div>
   </div>
   <div class="hero-scroll">
@@ -527,6 +556,51 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
   <div class="hero-avail">
     <span><span class="hero-avail-dot"></span>Now Booking</span>
     <strong>Limited Availability</strong>
+  </div>
+</section>
+
+<!-- VALUE STRIP -->
+<section class="value-strip">
+  <div class="vs-inner">
+    <div class="vs-item">
+      <div class="vs-icon vs-icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg></div>
+      <div class="vs-text">
+        <strong>Premium Quality</strong>
+        <span>Cinematic photography with a creative edge.</span>
+      </div>
+    </div>
+    <div class="vs-item">
+      <div class="vs-icon vs-icon-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14M5 4l1 16h12l1-16M5 10h14M9 10v10M15 10v10"/></svg></div>
+      <div class="vs-text">
+        <strong>Directed Sessions</strong>
+        <span>Guided, intentional, and tailored to your vision.</span>
+      </div>
+    </div>
+    <div class="vs-item">
+      <div class="vs-icon vs-icon-yellow"><span class="vs-star">★</span></div>
+      <div class="vs-text">
+        <strong>Luxury Experience</strong>
+        <span>Elevated service from start to finish.</span>
+      </div>
+    </div>
+    <div class="vs-item">
+      <div class="vs-icon vs-icon-lightblue"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.25c-.2 0-.39-.05-.56-.16C9.14 18.6 3 14.3 3 9.15 3 6.3 5.3 4 8.15 4c1.6 0 3.03.73 3.85 1.9C12.82 4.73 14.25 4 15.85 4 18.7 4 21 6.3 21 9.15c0 5.15-6.14 9.45-8.44 10.94-.17.11-.36.16-.56.16z"/></svg></div>
+      <div class="vs-text">
+        <strong>Moments That Last</strong>
+        <span>Images that tell your story for a lifetime.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HERO VIDEO SHOWCASE -->
+<section class="hero-video-showcase">
+  <div class="hv-tile hv-tile-main" id="heroZone" data-dropslot="hero">
+    <video class="hv-hero-video" autoplay muted loop playsinline preload="metadata" poster="images/wedding-hero.jpg">
+      <source src="videos/posterchild-hero-full.mp4" type="video/mp4">
+      Your browser does not support embedded video.
+    </video>
+    <div class="hv-tile-empty" id="heroHint" style="display:none"><span>Your hero image<br>goes here</span></div>
   </div>
 </section>
 
@@ -947,7 +1021,7 @@ C.portfolio.forEach((item, i) => {
 });
 
 // Boot config images
-if (C.heroImage)  applyImage('hero',  C.heroImage);
+// Hero visual is now the video above; heroImage still used as its <video poster>.
 if (C.aboutImage) applyImage('about', C.aboutImage);
 
 // ── IMAGE ENGINE ────────────────────────────────────────────
@@ -1011,6 +1085,14 @@ document.querySelectorAll('a,button,.pi,.svc5-card,.bpd-item summary').forEach(e
 // ── NAV ─────────────────────────────────────────────────────
 window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50));
 function toggleMob() { document.getElementById('mobMenu').classList.toggle('open'); }
+
+// ── STICKY BOOK: hide while the hero (with its own booking CTA) is in view, so it never covers the mascot ──
+const stickyBook = document.querySelector('.sticky-book');
+const heroObs = new IntersectionObserver(
+  entries => entries.forEach(e => stickyBook.classList.toggle('sb-hide', e.isIntersecting)),
+  { threshold: 0 }
+);
+heroObs.observe(document.getElementById('home'));
 
 // ── SCROLL REVEAL ────────────────────────────────────────────
 const ro = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); ro.unobserve(e.target); } }), {threshold:0.1});
