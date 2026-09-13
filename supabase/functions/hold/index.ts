@@ -42,6 +42,8 @@ import {
   type PackagePricingSummary,
 } from "../_shared/pricingSummary.ts";
 import { parseStrictIsoTimestamp } from "../_shared/strictDatetime.ts";
+import { fingerprintClientIdentity } from "../_shared/clientIdentity.ts";
+import { checkRateLimit, RATE_LIMIT_SECRET } from "../_shared/rateLimit.ts";
 import type postgres from "npm:postgres@3";
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -67,6 +69,33 @@ function errorResponse(status: number, error: string, message: string, headers: 
   return new Response(
     JSON.stringify({ error, message }),
     { status, headers: { "Content-Type": "application/json", ...headers } },
+  );
+}
+
+function rateLimited(retryAfterSeconds: number, headers: HeadersInit): Response {
+  return new Response(
+    JSON.stringify({
+      error: "rate_limited",
+      message: "Too many requests. Please try again shortly.",
+    }),
+    {
+      status: 429,
+      headers: {
+        "Content-Type": "application/json",
+        "Retry-After": String(retryAfterSeconds),
+        ...headers,
+      },
+    },
+  );
+}
+
+function serverConfigurationError(headers: HeadersInit): Response {
+  return new Response(
+    JSON.stringify({
+      error: "server_configuration_error",
+      message: "Unable to process request.",
+    }),
+    { status: 500, headers: { "Content-Type": "application/json", ...headers } },
   );
 }
 
@@ -199,6 +228,28 @@ Deno.serve(async (req: Request) => {
       status: 405,
       headers: { "Content-Type": "application/json", ...headers },
     });
+  }
+
+  // Rate limit before any body is read, so a malformed request -- or one
+  // that later fails validation, collides, or is otherwise rejected --
+  // still consumes a unit once it has passed the origin/method gate.
+  // This increment commits on its own (see _shared/rateLimit.ts) and is
+  // never rolled back by the hold-creation transaction below.
+  let rateLimitResult: Awaited<ReturnType<typeof checkRateLimit>>;
+  try {
+    const clientFingerprint = await fingerprintClientIdentity(req, RATE_LIMIT_SECRET);
+    rateLimitResult = await checkRateLimit("hold", clientFingerprint);
+  } catch {
+    // Unexpected failure in the rate-limit path itself (e.g. a database
+    // connectivity problem) -- fails closed rather than falling through
+    // to body validation/business logic. The caught error is never
+    // logged itself, since it could carry a raw SQL/connection detail;
+    // only a fixed, generic label is recorded.
+    console.error("[hold] rate_limit_infrastructure_failure");
+    return serverConfigurationError(headers);
+  }
+  if (!rateLimitResult.allowed) {
+    return rateLimited(rateLimitResult.retryAfterSeconds, headers);
   }
 
   let rawBody: ArrayBuffer;

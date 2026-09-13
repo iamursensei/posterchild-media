@@ -14,9 +14,12 @@ import { jsonErrorResponse, mapError } from "../_shared/errors.ts";
 import { lazyExpireStaleHolds } from "../_shared/lazyExpire.ts";
 import { resolveAvailability } from "../_shared/availabilityResolver.ts";
 import { parseStrictIsoTimestamp } from "../_shared/strictDatetime.ts";
+import { fingerprintClientIdentity } from "../_shared/clientIdentity.ts";
+import { checkRateLimit, RATE_LIMIT_SECRET } from "../_shared/rateLimit.ts";
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const MAX_REQUEST_DURATION_MS = 24 * 60 * 60 * 1000; // sanity bound only, not a business rule
+const MAX_BODY_BYTES = 4096; // same conservative cap as hold -- this payload is a handful of UUIDs + timestamps
 const ALLOWED_BODY_FIELDS = new Set([
   "service_package_id",
   "service_addon_ids",
@@ -28,6 +31,33 @@ function badRequest(message: string, headers: HeadersInit): Response {
   return new Response(
     JSON.stringify({ error: "invalid_request", message }),
     { status: 422, headers: { "Content-Type": "application/json", ...headers } },
+  );
+}
+
+function rateLimited(retryAfterSeconds: number, headers: HeadersInit): Response {
+  return new Response(
+    JSON.stringify({
+      error: "rate_limited",
+      message: "Too many requests. Please try again shortly.",
+    }),
+    {
+      status: 429,
+      headers: {
+        "Content-Type": "application/json",
+        "Retry-After": String(retryAfterSeconds),
+        ...headers,
+      },
+    },
+  );
+}
+
+function serverConfigurationError(headers: HeadersInit): Response {
+  return new Response(
+    JSON.stringify({
+      error: "server_configuration_error",
+      message: "Unable to process request.",
+    }),
+    { status: 500, headers: { "Content-Type": "application/json", ...headers } },
   );
 }
 
@@ -56,9 +86,42 @@ Deno.serve(async (req: Request) => {
     });
   }
 
+  // Rate limit before any body is read, so a malformed or oversized body
+  // still consumes a unit once a request has passed the origin/method
+  // gate -- see _shared/rateLimit.ts for why this must commit on its own
+  // rather than inside the availability DB transaction below (there
+  // isn't one that writes here, but the same independent-commit
+  // discipline is kept for consistency with hold).
+  let rateLimitResult: Awaited<ReturnType<typeof checkRateLimit>>;
+  try {
+    const clientFingerprint = await fingerprintClientIdentity(req, RATE_LIMIT_SECRET);
+    rateLimitResult = await checkRateLimit("availability", clientFingerprint);
+  } catch {
+    // Unexpected failure in the rate-limit path itself (e.g. a database
+    // connectivity problem) -- fails closed rather than falling through
+    // to body validation/business logic. The caught error is never
+    // logged itself, since it could carry a raw SQL/connection detail;
+    // only a fixed, generic label is recorded.
+    console.error("[availability] rate_limit_infrastructure_failure");
+    return serverConfigurationError(headers);
+  }
+  if (!rateLimitResult.allowed) {
+    return rateLimited(rateLimitResult.retryAfterSeconds, headers);
+  }
+
+  let rawBody: ArrayBuffer;
+  try {
+    rawBody = await req.arrayBuffer();
+  } catch {
+    return badRequest("Request body could not be read.", headers);
+  }
+  if (rawBody.byteLength > MAX_BODY_BYTES) {
+    return badRequest("Request body exceeds the maximum allowed size.", headers);
+  }
+
   let body: unknown;
   try {
-    body = await req.json();
+    body = JSON.parse(new TextDecoder().decode(rawBody));
   } catch {
     return badRequest("Request body must be valid JSON.", headers);
   }
