@@ -1,0 +1,13 @@
+# Environment files -- never commit real secrets or local-only config.
+# .env.example is explicitly allowed back in as a template with no real
+# values, should one ever be added.
+.env
+.env.*
+!.env.example
+
+# Supabase CLI local-only state. Recreated automatically by any `supabase`
+# command (confirmed: `npx supabase --version` alone regenerates it) and
+# holds no project configuration of its own -- the actual, tracked and
+# reviewed configuration lives in supabase/config.toml.
+supabase/.temp/
+supabase/.branches/
