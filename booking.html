@@ -922,6 +922,12 @@ footer{background:var(--ink);padding:44px 40px 28px}
   </div>
 </footer>
 
+<!-- Stage 3B: catalog data foundation for the future booking wizard.
+     Read-only, public anon-key access to the six public_* catalog views
+     (see supabase/migrations/001_foundation_catalog.sql). Defines
+     window.loadPosterchildCatalog() only -- not called anywhere on this
+     page yet, so it has no effect on the current form. -->
+<script src="catalog.js"></script>
 <script>
 const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
