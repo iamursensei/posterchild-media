@@ -1,0 +1,43 @@
+-- =====================================================================
+-- Posterchild Media — Migration 005: Server-Only Rate Limit ACL
+-- =====================================================================
+-- DATA/ACCESS CORRECTION ONLY. No table, column, constraint, index,
+-- function, trigger, or RLS policy is created, dropped, or altered
+-- here. Builds on the live Migration 001-004 foundation -- none of
+-- those objects are touched.
+--
+-- ROOT CAUSE: Supabase's Postgres projects configure a default ACL
+-- (via ALTER DEFAULT PRIVILEGES, set up at the platform level, not by
+-- any migration in this repository) that automatically grants a
+-- baseline set of non-superuser table privileges to the anon and
+-- authenticated roles on every new table created by the postgres role
+-- in the public schema -- confirmed via a production ACL audit
+-- (privileges of the form "anon=Dxtm/postgres",
+-- "authenticated=Dxtm/postgres"). Migration 004 never issued a GRANT
+-- to either role -- these privileges were inherited automatically at
+-- CREATE TABLE time, not explicitly requested.
+--
+-- public.edge_rate_limit_buckets is SERVER-ONLY and is intended to be
+-- accessed only through trusted server-side booking infrastructure
+-- using an appropriately privileged production database connection.
+-- The exact production database connection role and privileges will
+-- be verified separately before Edge Function deployment. It must
+-- never be reachable via PostgREST using the anon or authenticated
+-- role. Migration 004 already enabled RLS with zero policies, which
+-- independently blocks row-level access for those roles -- this
+-- migration closes the separate, table-privilege-level gap so the
+-- inherited grants themselves no longer exist, rather than relying on
+-- RLS alone as the only barrier.
+--
+-- Scope: exactly one REVOKE, on exactly one table, targeting exactly
+-- the anon and authenticated roles. postgres (owner) and service_role
+-- are never referenced and are left completely unchanged. The
+-- platform-level default-privilege configuration itself is NOT
+-- altered here -- this migration only revokes the privileges already
+-- granted on this one existing table; it does not change what
+-- happens for any future table.
+-- =====================================================================
+
+revoke all privileges
+on table public.edge_rate_limit_buckets
+from anon, authenticated;
