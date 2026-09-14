@@ -25,6 +25,7 @@ import { withTransaction } from "../_shared/db.ts";
 import { jsonErrorResponse, mapError } from "../_shared/errors.ts";
 import { lazyExpireStaleHolds } from "../_shared/lazyExpire.ts";
 import { aggregateRequiredRoles, selectEligibleResourceIds } from "../_shared/availabilityResolver.ts";
+import { deriveHourlyUnitsFromStoredInterval, idempotencyMatches } from "../_shared/holdIdempotency.ts";
 import {
   applyBuffer,
   isLeadTimeSatisfied,
@@ -128,28 +129,6 @@ interface ExistingHoldRow {
   requested_end_datetime: Date;
   status: string;
   expires_at: Date;
-}
-
-/**
- * A stored idempotency key is treated as a safe replay ONLY when
- * service_package_id/start/end match exactly AND the current request
- * carries no add-ons. booking_holds does not persist which
- * service_addon_ids were part of the original request, so an add-on-
- * bearing retry can never be verified against it -- rather than
- * pretend otherwise, any such retry is rejected as a conflict.
- */
-function idempotencyMatches(
-  existing: ExistingHoldRow,
-  servicePackageId: string,
-  startMs: number,
-  endMs: number,
-  serviceAddonIds: string[],
-): boolean {
-  if (serviceAddonIds.length > 0) return false;
-  if (existing.service_package_id !== servicePackageId) return false;
-  if (existing.requested_start_datetime.getTime() !== startMs) return false;
-  if (existing.requested_end_datetime.getTime() !== endMs) return false;
-  return true;
 }
 
 async function fetchPackagePricingFieldsUnfiltered(
@@ -363,6 +342,20 @@ Deno.serve(async (req: Request) => {
         if (existing.status === "active") {
           if (idempotencyMatches(existing, servicePackageId, startMs, endMs, serviceAddonIds as string[])) {
             const pkgFields = await fetchPackagePricingFieldsUnfiltered(tx, existing.service_package_id);
+            let validatedHourUnits: number | null = null;
+            if (pkgFields.pricingType === "hourly") {
+              const unitsResult = deriveHourlyUnitsFromStoredInterval(
+                existing.requested_start_datetime.getTime(),
+                existing.requested_end_datetime.getTime(),
+              );
+              if (!unitsResult.ok) {
+                return {
+                  kind: "policy_misconfigured",
+                  detail: `idempotent replay of hold ${existing.id}: ${unitsResult.detail}`,
+                };
+              }
+              validatedHourUnits = unitsResult.units;
+            }
             return {
               kind: "success",
               created: false,
@@ -371,7 +364,7 @@ Deno.serve(async (req: Request) => {
               requestedStart: existing.requested_start_datetime.toISOString(),
               requestedEnd: existing.requested_end_datetime.toISOString(),
               servicePackageId: existing.service_package_id,
-              packagePricingSummary: buildPackagePricingSummary({ ...pkgFields, validatedHourUnits: null }),
+              packagePricingSummary: buildPackagePricingSummary({ ...pkgFields, validatedHourUnits }),
               addonPricingSummary: [],
             };
           }
