@@ -313,6 +313,73 @@ section{padding:88px 40px}
 .fsucc-h{font-family:var(--font-display);font-size:44px;font-weight:700;color:var(--ink);margin-bottom:14px}
 .fsucc-p{font-family:var(--font-ui);font-size:16px;color:var(--ink-soft);line-height:1.7}
 
+/* ── BOOKING WIZARD (Stage 3C) ─────────────────────────── */
+.wiz-steps{margin-bottom:36px;overflow-x:auto}
+.wiz-steps ol{list-style:none;display:flex;gap:6px;background:var(--surface);border-radius:var(--radius-pill);padding:4px;min-width:min-content}
+.wiz-step-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 8px;border:none;background:transparent;border-radius:var(--radius-pill);cursor:pointer;font-family:var(--font-ui);color:var(--ink-soft);transition:all 0.25s;white-space:nowrap}
+.wiz-step-btn:disabled{opacity:0.4;cursor:not-allowed}
+.wiz-step-btn:not(:disabled):hover{color:var(--ink)}
+.wiz-step-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.wiz-step-num{width:22px;height:22px;border-radius:50%;background:var(--white);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.wiz-step-btn.active{background:var(--blue);color:var(--white)}
+.wiz-step-btn.active .wiz-step-num{background:var(--white);border-color:var(--white);color:var(--blue)}
+.wiz-step-btn.done .wiz-step-num{background:var(--blue);border-color:var(--blue);color:var(--white)}
+.wiz-step-label{font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+
+.wiz-panel-title{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--ink);margin-bottom:20px}
+.wiz-fieldset{border:none;padding:0;margin:0 0 26px}
+.wiz-fieldset legend{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px;padding:0;width:100%}
+.wiz-tile-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.wiz-tile{position:relative;display:block;border:1.5px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:16px 18px;cursor:pointer;transition:all 0.2s}
+.wiz-tile-input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.wiz-tile:focus-within{box-shadow:0 0 0 3px rgba(21,101,255,0.25);border-color:var(--blue)}
+.wiz-tile:hover{border-color:var(--blue-light)}
+.wiz-tile.selected{border-color:var(--blue);background:var(--blue-pale)}
+.wiz-tile-unavailable{cursor:not-allowed;opacity:0.55;background:var(--surface);border-style:dashed}
+.wiz-tile-unavailable .wiz-tile-name{color:var(--ink-soft)}
+.wiz-tile-body{display:flex;flex-direction:column;gap:4px}
+.wiz-tile-name{font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--ink)}
+.wiz-tile-price{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--blue)}
+.wiz-tile-meta{font-family:var(--font-ui);font-size:11px;color:var(--ink-soft);line-height:1.5}
+.wiz-tile-check{display:none;align-items:center;gap:4px;font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-top:6px}
+.wiz-tile.selected .wiz-tile-check{display:flex}
+
+.wiz-check-list{display:flex;flex-direction:column;gap:8px}
+.wiz-check{display:flex;align-items:flex-start;gap:10px;border:1.5px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:12px 16px;cursor:pointer;transition:all 0.2s}
+.wiz-check:focus-within{box-shadow:0 0 0 3px rgba(21,101,255,0.25);border-color:var(--blue)}
+.wiz-check.is-checked{border-color:var(--blue);background:var(--blue-pale)}
+.wiz-check input{margin-top:3px;width:16px;height:16px;flex-shrink:0}
+.wiz-check-body{display:flex;flex-direction:column;gap:2px}
+.wiz-check-name{font-family:var(--font-ui);font-size:13px;font-weight:700;color:var(--ink)}
+.wiz-check-meta{font-family:var(--font-ui);font-size:11px;color:var(--ink-soft)}
+
+.wiz-note{font-family:var(--font-ui);font-size:12px;color:var(--ink-soft);line-height:1.6;background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);padding:12px 16px;margin:0 0 20px}
+.wiz-note-warn{background:var(--yellow-pale);border-color:rgba(255,214,0,0.4);color:var(--ink-mid)}
+.wiz-tz-badge{display:inline-block;margin-left:8px;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:none;color:var(--blue);background:var(--blue-pale);padding:2px 8px;border-radius:var(--radius-pill);vertical-align:middle}
+
+.wiz-product-group{margin-bottom:28px}
+.wiz-product-group-title{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
+.wiz-product-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;border:1.5px solid var(--border-light);border-radius:var(--radius);padding:12px 16px;margin-bottom:8px}
+.wiz-product-name{font-family:var(--font-ui);font-size:13px;font-weight:700;color:var(--ink)}
+.wiz-product-meta{font-family:var(--font-ui);font-size:11px;color:var(--ink-soft);margin-top:2px}
+.wiz-product-price{font-family:var(--font-ui);font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.wiz-product-qty{width:64px;padding:8px;border:1.5px solid var(--border);border-radius:var(--radius);font-family:var(--font-body);font-size:14px;text-align:center}
+.wiz-product-request{border-style:dashed;background:var(--surface)}
+.wiz-product-request-badge{font-family:var(--font-ui);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);background:var(--white);border:1px solid var(--border);padding:4px 10px;border-radius:var(--radius-pill);white-space:nowrap}
+
+.wiz-summary{display:flex;flex-direction:column;gap:18px;margin-bottom:24px}
+.wiz-summary-group{border-bottom:1px solid var(--border-light);padding-bottom:16px}
+.wiz-summary-group-title{font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+.wiz-summary-row{display:flex;justify-content:space-between;gap:16px;font-family:var(--font-ui);font-size:13px;color:var(--ink);padding:4px 0}
+.wiz-summary-row span:last-child{color:var(--ink-soft);text-align:right}
+.wiz-summary-total{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--ink);padding-top:8px}
+
+.wiz-nav{display:flex;justify-content:space-between;gap:12px;margin-top:8px}
+.wiz-nav .fbtn{flex:1}
+.fbtn-ghost{background:transparent;color:var(--ink-soft);border:1.5px solid var(--border);box-shadow:none}
+.fbtn-ghost:hover{background:var(--surface);color:var(--ink);transform:none}
+.fbtn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+
 /* FINAL CTA */
 .final-cta{background:var(--surface);padding:80px 40px;text-align:center}
 .final-cta-inner{max-width:640px;margin:0 auto}
@@ -368,11 +435,15 @@ footer{background:var(--ink);padding:44px 40px 28px}
   .budget-opts,.prints-radio{grid-template-columns:1fr 1fr}
   .ph-stats{gap:24px}.ph-stat-div{display:none}
   .sticky-book{bottom:18px;right:18px;padding:12px 20px;font-size:11px}
+  .wiz-tile-grid{grid-template-columns:1fr}
+  .wiz-product-row{grid-template-columns:1fr;justify-items:start}
 }
 @media(max-width:600px){
   .budget-opts,.prints-radio{grid-template-columns:1fr}
   .final-cta-btns{flex-direction:column;align-items:center}
   .power-features{flex-direction:column;gap:10px}
+  .wiz-nav{flex-direction:column}
+  .wiz-step-label{font-size:7.5px}
 }
 </style>
 </head>
@@ -515,9 +586,9 @@ footer{background:var(--ink);padding:44px 40px 28px}
     <div class="pricing-group-label reveal">Post-Production</div>
     <div class="pricing-grid reveal">
       <div class="price-card" style="text-align:left">
-        <div class="price-name" style="font-size:18px">Photo Retouching</div>
+        <div class="price-name" style="font-size:18px">Skin &amp; Beauty Retouching</div>
         <div class="price-starting">Starting at</div>
-        <div class="price-amount" style="font-size:28px">$40/image</div>
+        <div class="price-amount" style="font-size:28px">$25/image</div>
         <p class="price-desc" style="border-top:none;padding-top:0">Custom gallery pricing available.</p>
       </div>
       <div class="price-card" style="text-align:left">
@@ -797,91 +868,145 @@ footer{background:var(--ink);padding:44px 40px 28px}
     </div>
 
     <div id="formWrap">
-      <div class="form-tabs">
-        <button class="ftab active" onclick="goStep(1)">01 · Your Info</button>
-        <button class="ftab" onclick="goStep(2)">02 · Shoot Details</button>
-        <button class="ftab" onclick="goStep(3)">03 · Vision & Investment</button>
-      </div>
+      <nav class="wiz-steps" aria-label="Booking steps">
+        <ol>
+          <li><button type="button" class="wiz-step-btn active" data-step="1" aria-current="step"><span class="wiz-step-num">1</span><span class="wiz-step-label">Your Info</span></button></li>
+          <li><button type="button" class="wiz-step-btn" data-step="2" disabled><span class="wiz-step-num">2</span><span class="wiz-step-label">Service &amp; Package</span></button></li>
+          <li><button type="button" class="wiz-step-btn" data-step="3" disabled><span class="wiz-step-num">3</span><span class="wiz-step-label">Date &amp; Details</span></button></li>
+          <li><button type="button" class="wiz-step-btn" data-step="4" disabled><span class="wiz-step-num">4</span><span class="wiz-step-label">Prints &amp; Keepsakes</span></button></li>
+          <li><button type="button" class="wiz-step-btn" data-step="5" disabled><span class="wiz-step-num">5</span><span class="wiz-step-label">Review</span></button></li>
+        </ol>
+      </nav>
 
-      <div class="fpanel active" id="step1">
-        <div class="frow">
-          <div class="fg"><label>First Name</label><input type="text" id="fname" placeholder="Your first name"></div>
-          <div class="fg"><label>Last Name</label><input type="text" id="lname" placeholder="Your last name"></div>
-        </div>
-        <div class="frow">
-          <div class="fg"><label>Email</label><input type="email" id="email" placeholder="your@email.com"></div>
-          <div class="fg"><label>Phone</label><input type="tel" id="phone" placeholder="+1 (000) 000-0000"></div>
-        </div>
-        <div class="fg"><label>How did you hear about us?</label>
-          <select id="source"><option value="">Select one</option><option>Instagram</option><option>Referral from a friend</option><option>Google search</option><option>TikTok</option><option>Other</option></select>
-        </div>
-        <button class="fbtn" onclick="goStep(2)">Continue — Shoot Details →</button>
-      </div>
+      <p class="wiz-note wiz-note-warn" id="wizValidationMessage" role="alert" hidden></p>
 
-      <div class="fpanel" id="step2">
-        <div class="frow">
-          <div class="fg"><label>Session Type</label>
-            <select id="type"><option value="">Select type</option><option>Portraits & Milestones</option><option>Events</option><option>Corporate & Commercial</option><option>Creative Direction & Production</option><option>Real Estate Media</option><option>Other</option></select>
+      <form id="wizardForm" novalidate>
+        <!-- STEP 1 — YOUR INFO -->
+        <section class="wiz-panel" id="wizStep1" data-step="1">
+          <h3 class="wiz-panel-title">Your Info</h3>
+          <div class="frow">
+            <div class="fg"><label for="wizFirstName">First Name</label>
+              <input type="text" id="wizFirstName" name="first_name" autocomplete="given-name" required></div>
+            <div class="fg"><label for="wizLastName">Last Name</label>
+              <input type="text" id="wizLastName" name="last_name" autocomplete="family-name"></div>
           </div>
-          <div class="fg"><label>Preferred Date</label><input type="date" id="pdate"></div>
-        </div>
-        <div class="frow">
-          <div class="fg"><label>Location / City</label><input type="text" id="plocation" placeholder="City or specific venue"></div>
-          <div class="fg"><label>Number of People</label>
-            <select id="people"><option value="">Select</option><option>Just me</option><option>2–4 people</option><option>5–10 people</option><option>10+ people</option></select>
+          <div class="frow">
+            <div class="fg"><label for="wizEmail">Email</label>
+              <input type="email" id="wizEmail" name="email" autocomplete="email" required></div>
+            <div class="fg"><label for="wizPhone">Phone</label>
+              <input type="tel" id="wizPhone" name="phone" autocomplete="tel"></div>
           </div>
-        </div>
-        <div class="fg"><label>Do you need videography?</label>
-          <select id="video"><option value="">Select</option><option>Photography only</option><option>Videography only</option><option>Both — Photo + Video</option></select>
-        </div>
-        <button class="fbtn" onclick="goStep(3)">Continue — Vision & Investment →</button>
-      </div>
+          <div class="fg"><label for="wizSource">How did you hear about us?</label>
+            <select id="wizSource" name="source">
+              <option value="">Select one</option>
+              <option>Instagram</option><option>Referral from a friend</option>
+              <option>Google search</option><option>TikTok</option><option>Other</option>
+            </select>
+          </div>
+          <div class="wiz-nav"><button type="button" class="fbtn" data-next="2">Continue — Service &amp; Package →</button></div>
+        </section>
 
-      <div class="fpanel" id="step3">
-        <div id="preSelectBadge" style="display:none">
-          <div class="pre-select">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            Experience selected: <strong id="preSelectLabel"></strong>
-          </div>
-        </div>
-        <div class="fg"><label>Describe your vision</label>
-          <textarea id="vision" placeholder="Tell us the mood, energy, and story you want to tell..."></textarea>
-        </div>
-        <div class="fg"><label>References or inspiration?</label>
-          <textarea id="inspo" placeholder="Instagram accounts, Pinterest boards, aesthetic vibes..." style="min-height:80px"></textarea>
-        </div>
-        <div class="fg">
-          <label>Select Your Investment Level <span style="color:var(--red);font-size:10px">(Required)</span></label>
-          <div class="budget-opts" id="budgetOpts">
-            <div class="bopt" onclick="pickBudget(this,'$200–$500')">$200–$500</div>
-            <div class="bopt" onclick="pickBudget(this,'$500–$1,000')">$500–$1,000</div>
-            <div class="bopt" onclick="pickBudget(this,'$1,000–$2,500')">$1,000–$2,500</div>
-            <div class="bopt" onclick="pickBudget(this,'$2,500–$5,000')">$2,500–$5,000</div>
-            <div class="bopt" onclick="pickBudget(this,'$5,000+')">$5,000+</div>
-            <div class="bopt" onclick="pickBudget(this,'Not Sure / Custom Quote')">Not Sure / Custom Quote</div>
-          </div>
-        </div>
-        <!-- PRINTS UPSELL QUESTION -->
-        <div class="fg">
-          <label>Are you interested in prints or framed photos?</label>
-          <div class="prints-radio" id="printsOpts">
-            <div class="pr-opt" onclick="pickPrints(this,'Yes')">
-              <div class="pr-opt-icon">🖼</div>Yes, I'm interested
-            </div>
-            <div class="pr-opt" onclick="pickPrints(this,'Maybe')">
-              <div class="pr-opt-icon">💭</div>Maybe — tell me more
-            </div>
-            <div class="pr-opt" onclick="pickPrints(this,'Not at the moment')">
-              <div class="pr-opt-icon">👋</div>Not at the moment
+        <!-- STEP 2 — SERVICE & PACKAGE -->
+        <section class="wiz-panel" id="wizStep2" data-step="2" hidden>
+          <h3 class="wiz-panel-title">Service &amp; Package</h3>
+          <p class="wiz-note" id="wizCatalogLoading">Loading current services and packages…</p>
+          <div class="wiz-note wiz-note-warn" id="wizCatalogError" hidden>
+            Live package selection is temporarily unavailable right now. Tell us what you're interested in below and we'll follow up with exact pricing.
+            <div class="fg" style="margin-top:12px;margin-bottom:0">
+              <label for="wizServiceInterest">What are you interested in?</label>
+              <textarea id="wizServiceInterest" name="service_interest_freetext" placeholder="e.g. A studio portrait session, event coverage, real estate photos..."></textarea>
             </div>
           </div>
-        </div>
-        <div class="fg"><label>What experience are you looking for?</label>
-          <textarea id="expField" placeholder="Intimate and personal? Bold and editorial? Romantic and cinematic?" style="min-height:80px"></textarea>
-        </div>
-        <button class="fbtn" onclick="submitForm()">Submit Inquiry — Let's Create →</button>
-        <p class="fnote">A 25% deposit will be required to secure your date. We respond within 24 hours.</p>
-      </div>
+          <fieldset class="wiz-fieldset" id="wizServiceFieldset" hidden>
+            <legend>Select a Service</legend>
+            <div class="wiz-tile-grid" id="wizServiceTiles"></div>
+          </fieldset>
+          <fieldset class="wiz-fieldset" id="wizCategoryFieldset" hidden>
+            <legend id="wizCategoryLegend">What are we creating?</legend>
+            <div class="wiz-tile-grid" id="wizCategoryTiles"></div>
+          </fieldset>
+          <fieldset class="wiz-fieldset" id="wizPackageFieldset" hidden>
+            <legend>Select a Package</legend>
+            <div class="wiz-tile-grid" id="wizPackageTiles"></div>
+          </fieldset>
+          <div class="fg" id="wizDurationBlock" hidden>
+            <label for="wizHourlyUnits" id="wizDurationLabel">Session Length</label>
+            <select id="wizHourlyUnits"></select>
+          </div>
+          <fieldset class="wiz-fieldset" id="wizPackageAddonFieldset" hidden>
+            <legend id="wizPackageAddonLegend">Optional Extras</legend>
+            <div class="wiz-check-list" id="wizPackageAddonChecks"></div>
+            <p class="wiz-note" style="margin-top:12px;margin-bottom:0">These require advance notice and are subject to availability — final compatibility and pricing will be confirmed with your project.</p>
+          </fieldset>
+          <fieldset class="wiz-fieldset" id="wizAddonFieldset" hidden>
+            <legend>Optional Add-On Interests</legend>
+            <div class="wiz-check-list" id="wizAddonChecks"></div>
+            <p class="wiz-note" style="margin-top:12px;margin-bottom:0">These are interests only, not automatic additions to your package — final compatibility, availability, and pricing for any add-on will be confirmed with your specific project.</p>
+          </fieldset>
+          <p class="wiz-note" id="wizRealEstateNote" hidden>Property video, drone coverage, and professional audio are available by request for Real Estate projects — mention your interest in your project details and we'll follow up with availability and pricing.</p>
+          <div class="wiz-nav">
+            <button type="button" class="fbtn fbtn-ghost" data-prev="1">← Back</button>
+            <button type="button" class="fbtn" data-next="3">Continue — Date &amp; Details →</button>
+          </div>
+        </section>
+
+        <!-- STEP 3 — DATE & DETAILS -->
+        <section class="wiz-panel" id="wizStep3" data-step="3" hidden>
+          <h3 class="wiz-panel-title">Date &amp; Details</h3>
+          <p class="wiz-note" id="wizNoScheduleNote" hidden>This project doesn't have a fixed schedulable duration yet — date and time are optional here. We'll follow up directly to confirm timing.</p>
+          <div class="frow">
+            <div class="fg"><label for="wizDate">Preferred Date</label>
+              <input type="date" id="wizDate" name="preferred_date"></div>
+            <div class="fg"><label for="wizTime">Preferred Start Time <span class="wiz-tz-badge">Eastern Time</span></label>
+              <input type="time" id="wizTime" name="preferred_time"></div>
+          </div>
+          <div class="frow">
+            <div class="fg"><label for="wizLocation">Location / City</label>
+              <input type="text" id="wizLocation" name="location" placeholder="City or specific venue"></div>
+            <div class="fg"><label for="wizPeople">Number of People</label>
+              <select id="wizPeople" name="people">
+                <option value="">Select</option><option>Just me</option><option>2–4 people</option>
+                <option>5–10 people</option><option>10+ people</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg"><label for="wizVision">Tell us about your project</label>
+            <textarea id="wizVision" name="vision" placeholder="The mood, energy, and story you want to tell..."></textarea>
+          </div>
+          <div class="fg"><label for="wizInspo">References or inspiration?</label>
+            <textarea id="wizInspo" name="inspiration" placeholder="Instagram accounts, Pinterest boards, aesthetic vibes..."></textarea>
+          </div>
+          <p class="wiz-note">Availability will be confirmed before your date is held.</p>
+          <div class="wiz-nav">
+            <button type="button" class="fbtn fbtn-ghost" data-prev="2">← Back</button>
+            <button type="button" class="fbtn" data-next="4">Continue — Prints &amp; Keepsakes →</button>
+          </div>
+        </section>
+
+        <!-- STEP 4 — PRINTS & KEEPSAKES -->
+        <section class="wiz-panel" id="wizStep4" data-step="4" hidden>
+          <h3 class="wiz-panel-title">Prints &amp; Keepsakes</h3>
+          <p class="wiz-note">Optional — these can also be added after your gallery is delivered.</p>
+          <p class="wiz-note wiz-note-warn" id="wizProductsError" hidden>Product selection is temporarily unavailable right now — you can still request prints and keepsakes in your project details.</p>
+          <div id="wizProductGroups"></div>
+          <div class="wiz-nav">
+            <button type="button" class="fbtn fbtn-ghost" data-prev="3">← Back</button>
+            <button type="button" class="fbtn" data-next="5">Continue — Review →</button>
+          </div>
+        </section>
+
+        <!-- STEP 5 — REVIEW -->
+        <section class="wiz-panel" id="wizStep5" data-step="5" hidden>
+          <h3 class="wiz-panel-title">Review</h3>
+          <div class="wiz-summary" id="wizReviewSummary"></div>
+          <p class="wiz-note" id="wizSubmitStatus" role="status" aria-live="polite" hidden></p>
+          <div class="wiz-nav">
+            <button type="button" class="fbtn fbtn-ghost" data-prev="4">← Back</button>
+            <button type="submit" class="fbtn" id="wizardSubmitBtn">Submit Booking Request</button>
+          </div>
+          <p class="fnote">Dates are reserved on a first-confirmed basis. Your session is secured once your agreement is completed and retainer is received.</p>
+        </section>
+      </form>
     </div>
 
     <div class="form-success" id="formSuccess">
@@ -925,9 +1050,12 @@ footer{background:var(--ink);padding:44px 40px 28px}
 <!-- Stage 3B: catalog data foundation for the future booking wizard.
      Read-only, public anon-key access to the six public_* catalog views
      (see supabase/migrations/001_foundation_catalog.sql). Defines
-     window.loadPosterchildCatalog() only -- not called anywhere on this
-     page yet, so it has no effect on the current form. -->
+     window.loadPosterchildCatalog(), called by wizard.js below. -->
 <script src="catalog.js"></script>
+<!-- Stage 3C: the five-step booking wizard shell. Reads the catalog via
+     catalog.js, drives #wizardForm, and still submits through FormSubmit
+     (no availability/hold calls, no Supabase writes -- see wizard.js). -->
+<script src="wizard.js"></script>
 <script>
 const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
@@ -942,94 +1070,15 @@ function toggleMob(){document.getElementById('mobMenu').classList.toggle('open')
 const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');ro.unobserve(x.target)}}),{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(r=>ro.observe(r));
 
-let budget='', prints='';
-function goStep(n){
-  document.querySelectorAll('.fpanel').forEach((p,i)=>p.classList.toggle('active',i===n-1));
-  document.querySelectorAll('.ftab').forEach((t,i)=>t.classList.toggle('active',i===n-1));
-  document.getElementById('booking-form').scrollIntoView({behavior:'smooth',block:'start'});
-}
-function pickBudget(el,val){
-  document.querySelectorAll('.bopt').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');budget=val;
-}
-function pickPrints(el,val){
-  document.querySelectorAll('.pr-opt').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');prints=val;
-}
-function preSelect(val){
-  budget=val;
-  goStep(3);
-  document.querySelectorAll('.bopt').forEach(b=>{
-    b.classList.remove('sel');
-    if(b.textContent.trim()===val)b.classList.add('sel');
-  });
-  const badge=document.getElementById('preSelectBadge');
-  document.getElementById('preSelectLabel').textContent=val;
-  badge.style.display='block';
-  setTimeout(()=>document.getElementById('booking-form').scrollIntoView({behavior:'smooth',block:'start'}),100);
-}
-function selectService(type,budgetVal){
-  const typeSel=document.getElementById('type');
-  for(const o of typeSel.options){ if(o.value===type){ typeSel.value=type; break; } }
-  preSelect(budgetVal);
-}
-// Prefill from a Services CTA link like booking.html?service=Events#booking-form
-(function prefillFromQuery(){
-  const params=new URLSearchParams(window.location.search);
-  const service=params.get('service');
-  if(!service)return;
-  const typeSel=document.getElementById('type');
-  for(const o of typeSel.options){ if(o.value===service){ typeSel.value=service; break; } }
-  const badge=document.getElementById('preSelectBadge');
-  document.getElementById('preSelectLabel').textContent=service;
-  badge.style.display='block';
-  goStep(2);
-})();
-async function submitForm(){
-  const fname=document.getElementById('fname').value.trim();
-  const lname=document.getElementById('lname').value.trim();
-  const email=document.getElementById('email').value.trim();
-  const type=document.getElementById('type').value;
-  if(!fname){alert('Please enter your name.');return}
-  if(!email){alert('Please enter your email.');return}
-  if(!type){alert('Please select a session type.');return}
-  if(!budget){alert('Please select your investment level.');return}
-  const data={
-    _subject:'New Posterchild Media Booking Inquiry',
-    _template:'table',
-    _captcha:'false',
-    _autoresponse:'Thank you for contacting Posterchild Media! We received your booking request and will reach out within 24 hours to discuss your vision, confirm availability, and reserve your session.',
-    _next: window.location.href,
-    submitted_at:new Date().toLocaleString(),
-    first_name:fname,
-    last_name:lname,
-    email,
-    phone:document.getElementById('phone').value.trim(),
-    source:document.getElementById('source').value,
-    session_type:type,
-    preferred_date:document.getElementById('pdate').value,
-    location:document.getElementById('plocation').value.trim(),
-    people:document.getElementById('people').value,
-    video:document.getElementById('video').value,
-    vision:document.getElementById('vision').value.trim(),
-    inspiration:document.getElementById('inspo').value.trim(),
-    investment_level:budget,
-    prints_interest:prints,
-    experience:document.getElementById('expField').value.trim()
-  };
-  try{
-    await fetch('https://formsubmit.co/ajax/amvlgam@gmail.com',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify(data)
-    });
-  }catch(e){
-    const body=Object.entries(data).map(([k,v])=>`${k}: ${v||''}`).join('%0D%0A');
-    window.location.href=`mailto:amvlgam@gmail.com?subject=New Posterchild Media Booking Inquiry&body=${body}`;
-  }
-  document.getElementById('formWrap').style.display='none';
-  document.getElementById('formSuccess').classList.add('show');
-  document.getElementById('booking-form').scrollIntoView({behavior:'smooth',block:'start'});
+// The pricing cards above (outside the form, left untouched this stage)
+// still call selectService(name, legacyBudgetHint) via onclick. The budget
+// hint is no longer meaningful -- Stage 3C replaces investment-level
+// ranges with real catalog pricing -- and is intentionally ignored.
+// Preselection and ?service= query-param handling are both owned by
+// wizard.js now (see PosterchildWizard.selectServiceByName), which is the
+// single source of truth for matching a service name to the live catalog.
+function selectService(name, _legacyBudgetHint){
+  if (window.PosterchildWizard) window.PosterchildWizard.selectServiceByName(name);
 }
 </script>
 </body>
