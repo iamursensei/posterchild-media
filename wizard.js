@@ -46,6 +46,13 @@
     inspiration: '',
     serviceInterestFreetext: '',
     selectedProducts: {}, // productId -> quantity (purchasable products only)
+    // Booking acknowledgment (Step 5) -- three distinct, unbundled
+    // controls. consentTerms is required to submit; the other two are
+    // optional and off by default. consentPublicationInterest is only a
+    // preliminary interest flag, never the actual publication release.
+    consentTerms: false,
+    consentMarketing: false,
+    consentPublicationInterest: false,
   };
 
   // ---------------------------------------------------------------------
@@ -325,6 +332,10 @@
         if (!wizardState.date) missing.push({ step: 3, msg: 'Please choose a preferred date.' });
         if (!wizardState.time) missing.push({ step: 3, msg: 'Please choose a preferred start time.' });
       }
+    }
+
+    if (!wizardState.consentTerms) {
+      missing.push({ step: 5, msg: 'Please agree to the Booking Terms and acknowledge the Privacy Policy to submit your inquiry.' });
     }
 
     return missing;
@@ -981,6 +992,21 @@
       el.addEventListener('input', () => setPath(path, el.value));
       el.addEventListener('change', () => setPath(path, el.value));
     };
+    // Booking-acknowledgment checkboxes (Step 5) -- static markup, not
+    // catalog-rendered, so wired directly here rather than through
+    // renderAddonChecklistInto(). Reuses the same .wiz-check visual
+    // language and the same is-checked toggle pattern as every other
+    // checkbox in the wizard, for a consistent (non-color-alone)
+    // selected state.
+    const bindCheckbox = (id, path) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('change', () => {
+        setPath(path, el.checked);
+        const wrap = el.closest('.wiz-check');
+        if (wrap) wrap.classList.toggle('is-checked', el.checked);
+      });
+    };
     function setPath(path, value) {
       const parts = path.split('.');
       let obj = wizardState;
@@ -999,6 +1025,9 @@
     bind('wizPeople', 'people');
     bind('wizVision', 'vision');
     bind('wizInspo', 'inspiration');
+    bindCheckbox('wizConsentTerms', 'consentTerms');
+    bindCheckbox('wizConsentMarketing', 'consentMarketing');
+    bindCheckbox('wizConsentPublication', 'consentPublicationInterest');
   }
 
   // ---------------------------------------------------------------------
@@ -1074,6 +1103,11 @@
       selected_addons: addonNames.length ? addonNames.join(', ') : 'None',
       selected_products: productLines.length ? productLines.join(', ') : 'None',
       estimated_selection_summary: buildEstimatedSelectionSummary(),
+      agreed_to_terms_and_privacy: wizardState.consentTerms ? 'Yes' : 'No',
+      marketing_consent: wizardState.consentMarketing ? 'Yes' : 'No',
+      // A preliminary interest flag only -- never the actual signed
+      // publication/model release, which is obtained separately.
+      publication_interest_only_not_a_release: wizardState.consentPublicationInterest ? 'Yes' : 'No',
     };
   }
 

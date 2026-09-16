@@ -3,7 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Posterchild Media — Jimmy Easton</title>
+<title>Posterchild Media | Atlanta Photography &amp; Creative Direction</title>
+<meta name="description" content="Posterchild Media is an Atlanta-area photography and creative direction studio led by Jimmy Easton — portraits, weddings, events, corporate, real estate, and studio rental. Book online.">
+<link rel="canonical" href="https://posterchildmedia.org/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Posterchild Media">
+<meta property="og:title" content="Posterchild Media | Atlanta Photography &amp; Creative Direction">
+<meta property="og:description" content="Atlanta-area photography and creative direction studio led by Jimmy Easton — portraits, weddings, events, corporate, real estate, and studio rental.">
+<meta property="og:url" content="https://posterchildmedia.org/">
+<meta property="og:image" content="https://posterchildmedia.org/images/editorial-beauty.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Posterchild Media | Atlanta Photography &amp; Creative Direction">
+<meta name="twitter:description" content="Atlanta-area photography and creative direction studio led by Jimmy Easton — portraits, weddings, events, corporate, real estate, and studio rental.">
+<meta name="twitter:image" content="https://posterchildmedia.org/images/editorial-beauty.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Posterchild Media",
+  "url": "https://posterchildmedia.org/",
+  "telephone": "+1-404-594-3928",
+  "email": "hello@posterchildmedia.org",
+  "areaServed": {
+    "@type": "City",
+    "name": "Atlanta, Georgia"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Jimmy Easton"
+  },
+  "sameAs": [
+    "https://instagram.com/posterchildmedia"
+  ]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400&family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 
 <script>
@@ -20,8 +53,9 @@ const SITE_CONFIG = {
   name:      "Jimmy Easton",
   brand:     "Posterchild Media",
   city:      "Atlanta, GA",
-  email:     "amvlgam@gmail.com",
-  instagram: "posterchildmedia", 
+  email:     "hello@posterchildmedia.org",
+  phone:     "(404) 594-3928",
+  instagram: "posterchildmedia",
   // updated homepage
   stats: [
     { num: "500+", label: "Sessions Shot"       },
@@ -923,7 +957,7 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Navigate</div>
-      <a href="index.html#portfolio">Portfolio</a><a href="index.html#services">Services</a><a href="index.html#about">Meet the Director</a><a href="booking.html">Book Now</a>
+      <a href="index.html#portfolio">Portfolio</a><a href="index.html#services">Services</a><a href="index.html#about">Meet the Director</a><a href="booking.html">Book Now</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Booking Terms</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Sessions</div>
@@ -931,6 +965,7 @@ footer{background:var(--ink);color:var(--white);padding:72px 40px 36px}
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Contact</div>
+      <a id="footerPhoneLink" href="#">—</a>
       <a id="footerEmailLink" href="#">—</a>
       <a href="booking.html">Book a Session</a>
       <a id="footerIGLink" href="#" target="_blank">—</a>
@@ -984,6 +1019,8 @@ document.getElementById('cityLabel').textContent    = C.city;
 document.getElementById('footerCopy').textContent   = '© 2026 ' + C.brand + ' · ' + C.name + ' · All Rights Reserved';
 document.getElementById('footerEmailLink').href      = 'mailto:' + C.email;
 document.getElementById('footerEmailLink').textContent = C.email;
+document.getElementById('footerPhoneLink').href      = 'tel:+14045943928';
+document.getElementById('footerPhoneLink').textContent = C.phone;
 document.getElementById('footerIGLink').href         = igUrl;
 document.getElementById('footerIGLink').textContent  = '@' + C.instagram;
 document.getElementById('footerIG').href             = igUrl;
