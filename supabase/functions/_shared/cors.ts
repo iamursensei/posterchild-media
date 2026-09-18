@@ -6,6 +6,7 @@
 
 const ALLOWED_ORIGINS = new Set<string>([
   // Production
+  "https://posterchildmedia.org",
   "https://posterchild-media.vercel.app",
   // Development
   "http://localhost:8080",
